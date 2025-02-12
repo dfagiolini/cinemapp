@@ -22,17 +22,17 @@ public class ProiezioneController {
         return this.proiezioneService.getProiezioneById(id);
     }
 
-    @Post(uri = "/insertSala")
-    public void insertSala(@Body Proiezione proiezione) {
+    @Post(uri = "/insertProiezione")
+    public void insertProiezione(@Body Proiezione proiezione) {
         this.proiezioneService.save(proiezione);
     }
 
-    @Put(uri = "/updateSala")
-    public void updateSala(@Body Proiezione proiezione) {
+    @Put(uri = "/updateProiezione")
+    public void updateProiezione(@Body Proiezione proiezione) {
         this.proiezioneService.update(proiezione);
     }
 
-    @Delete(uri = "/deleteSala/{id}")
+    @Delete(uri = "/deleteProiezione/{id}")
     public void delete(@PathVariable long id) {
         this.proiezioneService.delete(id);
     }
