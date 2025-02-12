@@ -99,7 +99,7 @@ jooq {
             driver = "org.postgresql.Driver"
             url = "jdbc:postgresql://localhost:5432/postgres"
             user = "postgres"
-            password = "root"
+            password = "1f3f02109cfa45ff8ad764d3b623e44b"
 
             // You can also pass user/password and other JDBC properties in the optional properties tag:
 

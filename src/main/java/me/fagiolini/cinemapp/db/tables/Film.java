@@ -65,7 +65,7 @@ public class Film extends TableImpl<FilmRecord> {
     /**
      * The column <code>cinemapp.film.durata</code>.
      */
-    public final TableField<FilmRecord, Integer> DURATA = createField(DSL.name("durata"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<FilmRecord, Integer> DURATA = createField(DSL.name("durata"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>cinemapp.film.copertina</code>.

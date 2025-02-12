@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -23,7 +24,10 @@ import java.io.Serializable;
 @Entity
 @Table(
     name = "sala",
-    schema = "cinemapp"
+    schema = "cinemapp",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "sala_cinema_id_numero_key", columnNames = { "cinema_id", "numero" })
+    }
 )
 public class Sala implements Serializable {
 
@@ -92,8 +96,7 @@ public class Sala implements Serializable {
     /**
      * Getter for <code>cinemapp.sala.capacita</code>.
      */
-    @Column(name = "capacita", nullable = false)
-    @NotNull
+    @Column(name = "capacita")
     public Integer getCapacita() {
         return this.capacita;
     }

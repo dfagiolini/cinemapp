@@ -4,7 +4,7 @@
 package me.fagiolini.cinemapp.db.tables;
 
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -69,12 +69,17 @@ public class Proiezione extends TableImpl<ProiezioneRecord> {
     /**
      * The column <code>cinemapp.proiezione.data_ora_fine</code>.
      */
-    public final TableField<ProiezioneRecord, LocalDate> DATA_ORA_FINE = createField(DSL.name("data_ora_fine"), SQLDataType.LOCALDATE.nullable(false), this, "");
+    public final TableField<ProiezioneRecord, LocalDateTime> DATA_ORA_FINE = createField(DSL.name("data_ora_fine"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
 
     /**
      * The column <code>cinemapp.proiezione.data_ora_inizio</code>.
      */
-    public final TableField<ProiezioneRecord, LocalDate> DATA_ORA_INIZIO = createField(DSL.name("data_ora_inizio"), SQLDataType.LOCALDATE.nullable(false), this, "");
+    public final TableField<ProiezioneRecord, LocalDateTime> DATA_ORA_INIZIO = createField(DSL.name("data_ora_inizio"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+
+    /**
+     * The column <code>cinemapp.proiezione.prezzo</code>.
+     */
+    public final TableField<ProiezioneRecord, Double> PREZZO = createField(DSL.name("prezzo"), SQLDataType.DOUBLE, this, "");
 
     /**
      * The column <code>cinemapp.proiezione.film_id</code>.
@@ -85,11 +90,6 @@ public class Proiezione extends TableImpl<ProiezioneRecord> {
      * The column <code>cinemapp.proiezione.sala_id</code>.
      */
     public final TableField<ProiezioneRecord, Long> SALA_ID = createField(DSL.name("sala_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>cinemapp.proiezione.prezzo</code>.
-     */
-    public final TableField<ProiezioneRecord, Double> PREZZO = createField(DSL.name("prezzo"), SQLDataType.DOUBLE.nullable(false), this, "");
 
     private Proiezione(Name alias, Table<ProiezioneRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -166,6 +166,11 @@ public class Proiezione extends TableImpl<ProiezioneRecord> {
     @Override
     public UniqueKey<ProiezioneRecord> getPrimaryKey() {
         return Keys.PROIEZIONE_PKEY;
+    }
+
+    @Override
+    public List<UniqueKey<ProiezioneRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.PROIEZIONE_DATA_ORA_INIZIO_DATA_ORA_FINE_SALA_ID_KEY);
     }
 
     @Override

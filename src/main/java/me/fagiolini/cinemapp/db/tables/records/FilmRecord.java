@@ -65,8 +65,7 @@ public class FilmRecord extends UpdatableRecordImpl<FilmRecord> {
     /**
      * Getter for <code>cinemapp.film.durata</code>.
      */
-    @Column(name = "durata", nullable = false)
-    @NotNull
+    @Column(name = "durata")
     public Integer getDurata() {
         return (Integer) get(1);
     }

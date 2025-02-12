@@ -10,10 +10,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -23,18 +24,21 @@ import java.time.LocalDate;
 @Entity
 @Table(
     name = "proiezione",
-    schema = "cinemapp"
+    schema = "cinemapp",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "proiezione_data_ora_inizio_data_ora_fine_sala_id_key", columnNames = { "data_ora_inizio", "data_ora_fine", "sala_id" })
+    }
 )
 public class Proiezione implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private LocalDate dataOraFine;
-    private LocalDate dataOraInizio;
+    private LocalDateTime dataOraFine;
+    private LocalDateTime dataOraInizio;
+    private Double prezzo;
     private Long filmId;
     private Long salaId;
-    private Double prezzo;
 
     public Proiezione() {}
 
@@ -42,25 +46,25 @@ public class Proiezione implements Serializable {
         this.id = value.id;
         this.dataOraFine = value.dataOraFine;
         this.dataOraInizio = value.dataOraInizio;
+        this.prezzo = value.prezzo;
         this.filmId = value.filmId;
         this.salaId = value.salaId;
-        this.prezzo = value.prezzo;
     }
 
     public Proiezione(
         Long id,
-        LocalDate dataOraFine,
-        LocalDate dataOraInizio,
+        LocalDateTime dataOraFine,
+        LocalDateTime dataOraInizio,
+        Double prezzo,
         Long filmId,
-        Long salaId,
-        Double prezzo
+        Long salaId
     ) {
         this.id = id;
         this.dataOraFine = dataOraFine;
         this.dataOraInizio = dataOraInizio;
+        this.prezzo = prezzo;
         this.filmId = filmId;
         this.salaId = salaId;
-        this.prezzo = prezzo;
     }
 
     /**
@@ -84,16 +88,16 @@ public class Proiezione implements Serializable {
     /**
      * Getter for <code>cinemapp.proiezione.data_ora_fine</code>.
      */
-    @Column(name = "data_ora_fine", nullable = false)
+    @Column(name = "data_ora_fine", nullable = false, precision = 6)
     @NotNull
-    public LocalDate getDataOraFine() {
+    public LocalDateTime getDataOraFine() {
         return this.dataOraFine;
     }
 
     /**
      * Setter for <code>cinemapp.proiezione.data_ora_fine</code>.
      */
-    public Proiezione setDataOraFine(LocalDate dataOraFine) {
+    public Proiezione setDataOraFine(LocalDateTime dataOraFine) {
         this.dataOraFine = dataOraFine;
         return this;
     }
@@ -101,17 +105,33 @@ public class Proiezione implements Serializable {
     /**
      * Getter for <code>cinemapp.proiezione.data_ora_inizio</code>.
      */
-    @Column(name = "data_ora_inizio", nullable = false)
+    @Column(name = "data_ora_inizio", nullable = false, precision = 6)
     @NotNull
-    public LocalDate getDataOraInizio() {
+    public LocalDateTime getDataOraInizio() {
         return this.dataOraInizio;
     }
 
     /**
      * Setter for <code>cinemapp.proiezione.data_ora_inizio</code>.
      */
-    public Proiezione setDataOraInizio(LocalDate dataOraInizio) {
+    public Proiezione setDataOraInizio(LocalDateTime dataOraInizio) {
         this.dataOraInizio = dataOraInizio;
+        return this;
+    }
+
+    /**
+     * Getter for <code>cinemapp.proiezione.prezzo</code>.
+     */
+    @Column(name = "prezzo")
+    public Double getPrezzo() {
+        return this.prezzo;
+    }
+
+    /**
+     * Setter for <code>cinemapp.proiezione.prezzo</code>.
+     */
+    public Proiezione setPrezzo(Double prezzo) {
+        this.prezzo = prezzo;
         return this;
     }
 
@@ -149,23 +169,6 @@ public class Proiezione implements Serializable {
         return this;
     }
 
-    /**
-     * Getter for <code>cinemapp.proiezione.prezzo</code>.
-     */
-    @Column(name = "prezzo", nullable = false)
-    @NotNull
-    public Double getPrezzo() {
-        return this.prezzo;
-    }
-
-    /**
-     * Setter for <code>cinemapp.proiezione.prezzo</code>.
-     */
-    public Proiezione setPrezzo(Double prezzo) {
-        this.prezzo = prezzo;
-        return this;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -193,6 +196,12 @@ public class Proiezione implements Serializable {
         }
         else if (!this.dataOraInizio.equals(other.dataOraInizio))
             return false;
+        if (this.prezzo == null) {
+            if (other.prezzo != null)
+                return false;
+        }
+        else if (!this.prezzo.equals(other.prezzo))
+            return false;
         if (this.filmId == null) {
             if (other.filmId != null)
                 return false;
@@ -205,12 +214,6 @@ public class Proiezione implements Serializable {
         }
         else if (!this.salaId.equals(other.salaId))
             return false;
-        if (this.prezzo == null) {
-            if (other.prezzo != null)
-                return false;
-        }
-        else if (!this.prezzo.equals(other.prezzo))
-            return false;
         return true;
     }
 
@@ -221,9 +224,9 @@ public class Proiezione implements Serializable {
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.dataOraFine == null) ? 0 : this.dataOraFine.hashCode());
         result = prime * result + ((this.dataOraInizio == null) ? 0 : this.dataOraInizio.hashCode());
+        result = prime * result + ((this.prezzo == null) ? 0 : this.prezzo.hashCode());
         result = prime * result + ((this.filmId == null) ? 0 : this.filmId.hashCode());
         result = prime * result + ((this.salaId == null) ? 0 : this.salaId.hashCode());
-        result = prime * result + ((this.prezzo == null) ? 0 : this.prezzo.hashCode());
         return result;
     }
 
@@ -234,9 +237,9 @@ public class Proiezione implements Serializable {
         sb.append(id);
         sb.append(", ").append(dataOraFine);
         sb.append(", ").append(dataOraInizio);
+        sb.append(", ").append(prezzo);
         sb.append(", ").append(filmId);
         sb.append(", ").append(salaId);
-        sb.append(", ").append(prezzo);
 
         sb.append(")");
         return sb.toString();

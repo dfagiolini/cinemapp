@@ -26,7 +26,7 @@ public class CinemaRepository {
         return cinemaDao.findById(id);
     }
     public void save(Cinema cinema) {
-        this.cinemaDao.insert();
+        this.cinemaDao.insert(cinema);
     }
 
     public void update(Cinema cinema) {

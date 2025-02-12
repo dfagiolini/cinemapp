@@ -3,9 +3,8 @@ package me.fagiolini.cinemapp.service;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import me.fagiolini.cinemapp.db.tables.daos.PrenotazioneDao;
-import me.fagiolini.cinemapp.db.tables.daos.ProiezioneDao;
-import me.fagiolini.cinemapp.db.tables.daos.SalaDao;
 import me.fagiolini.cinemapp.db.tables.pojos.Prenotazione;
+import me.fagiolini.cinemapp.repository.PrenotazioneRepository;
 import org.jooq.DSLContext;
 
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Singleton
 public class PrenotazioneService {
     @Inject
-    private PrenotazioneDao prenotazioneDao;
+    private PrenotazioneRepository prenotazioneRepository;
     @Inject
     private ProiezioneService proiezioneService;
 
@@ -25,25 +24,25 @@ public class PrenotazioneService {
     }
 
     public List<Prenotazione> getPrenotazioni() {
-        return this.prenotazioneDao.findAll();
+        return this.prenotazioneRepository.findAll();
     }
 
     public Prenotazione getPrenotazione(long id) {
-        return this.prenotazioneDao.findById(id);
+        return this.prenotazioneRepository.findById(id);
     }
 
     public void save(Prenotazione prenotazione) {
         if (this.proiezioneService.getDisponibilita(prenotazione.getProiezioneId()) > 0)
-            this.prenotazioneDao.insert(prenotazione);
+            this.prenotazioneRepository.save(prenotazione);
 
     }
 
     public void delete(long id) {
-        this.prenotazioneDao.deleteById(id);
+        this.prenotazioneRepository.deleteById(id);
     }
 
     public void update(Prenotazione prenotazione) {
-        this.prenotazioneDao.update(prenotazione);
+        this.prenotazioneRepository.update(prenotazione);
     }
 
 

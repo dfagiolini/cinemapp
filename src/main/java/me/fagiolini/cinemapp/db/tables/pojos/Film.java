@@ -92,8 +92,7 @@ public class Film implements Serializable {
     /**
      * Getter for <code>cinemapp.film.durata</code>.
      */
-    @Column(name = "durata", nullable = false)
-    @NotNull
+    @Column(name = "durata")
     public Integer getDurata() {
         return this.durata;
     }

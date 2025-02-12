@@ -10,9 +10,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import me.fagiolini.cinemapp.db.tables.Proiezione;
 
@@ -27,7 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Entity
 @Table(
     name = "proiezione",
-    schema = "cinemapp"
+    schema = "cinemapp",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "proiezione_data_ora_inizio_data_ora_fine_sala_id_key", columnNames = { "data_ora_inizio", "data_ora_fine", "sala_id" })
+    }
 )
 public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
 
@@ -54,7 +58,7 @@ public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
     /**
      * Setter for <code>cinemapp.proiezione.data_ora_fine</code>.
      */
-    public ProiezioneRecord setDataOraFine(LocalDate value) {
+    public ProiezioneRecord setDataOraFine(LocalDateTime value) {
         set(1, value);
         return this;
     }
@@ -62,16 +66,16 @@ public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
     /**
      * Getter for <code>cinemapp.proiezione.data_ora_fine</code>.
      */
-    @Column(name = "data_ora_fine", nullable = false)
+    @Column(name = "data_ora_fine", nullable = false, precision = 6)
     @NotNull
-    public LocalDate getDataOraFine() {
-        return (LocalDate) get(1);
+    public LocalDateTime getDataOraFine() {
+        return (LocalDateTime) get(1);
     }
 
     /**
      * Setter for <code>cinemapp.proiezione.data_ora_inizio</code>.
      */
-    public ProiezioneRecord setDataOraInizio(LocalDate value) {
+    public ProiezioneRecord setDataOraInizio(LocalDateTime value) {
         set(2, value);
         return this;
     }
@@ -79,17 +83,33 @@ public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
     /**
      * Getter for <code>cinemapp.proiezione.data_ora_inizio</code>.
      */
-    @Column(name = "data_ora_inizio", nullable = false)
+    @Column(name = "data_ora_inizio", nullable = false, precision = 6)
     @NotNull
-    public LocalDate getDataOraInizio() {
-        return (LocalDate) get(2);
+    public LocalDateTime getDataOraInizio() {
+        return (LocalDateTime) get(2);
+    }
+
+    /**
+     * Setter for <code>cinemapp.proiezione.prezzo</code>.
+     */
+    public ProiezioneRecord setPrezzo(Double value) {
+        set(3, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>cinemapp.proiezione.prezzo</code>.
+     */
+    @Column(name = "prezzo")
+    public Double getPrezzo() {
+        return (Double) get(3);
     }
 
     /**
      * Setter for <code>cinemapp.proiezione.film_id</code>.
      */
     public ProiezioneRecord setFilmId(Long value) {
-        set(3, value);
+        set(4, value);
         return this;
     }
 
@@ -99,14 +119,14 @@ public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
     @Column(name = "film_id", nullable = false)
     @NotNull
     public Long getFilmId() {
-        return (Long) get(3);
+        return (Long) get(4);
     }
 
     /**
      * Setter for <code>cinemapp.proiezione.sala_id</code>.
      */
     public ProiezioneRecord setSalaId(Long value) {
-        set(4, value);
+        set(5, value);
         return this;
     }
 
@@ -116,24 +136,7 @@ public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
     @Column(name = "sala_id", nullable = false)
     @NotNull
     public Long getSalaId() {
-        return (Long) get(4);
-    }
-
-    /**
-     * Setter for <code>cinemapp.proiezione.prezzo</code>.
-     */
-    public ProiezioneRecord setPrezzo(Double value) {
-        set(5, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>cinemapp.proiezione.prezzo</code>.
-     */
-    @Column(name = "prezzo", nullable = false)
-    @NotNull
-    public Double getPrezzo() {
-        return (Double) get(5);
+        return (Long) get(5);
     }
 
     // -------------------------------------------------------------------------
@@ -159,15 +162,15 @@ public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
     /**
      * Create a detached, initialised ProiezioneRecord
      */
-    public ProiezioneRecord(Long id, LocalDate dataOraFine, LocalDate dataOraInizio, Long filmId, Long salaId, Double prezzo) {
+    public ProiezioneRecord(Long id, LocalDateTime dataOraFine, LocalDateTime dataOraInizio, Double prezzo, Long filmId, Long salaId) {
         super(Proiezione.PROIEZIONE);
 
         setId(id);
         setDataOraFine(dataOraFine);
         setDataOraInizio(dataOraInizio);
+        setPrezzo(prezzo);
         setFilmId(filmId);
         setSalaId(salaId);
-        setPrezzo(prezzo);
         resetChangedOnNotNull();
     }
 
@@ -181,9 +184,9 @@ public class ProiezioneRecord extends UpdatableRecordImpl<ProiezioneRecord> {
             setId(value.getId());
             setDataOraFine(value.getDataOraFine());
             setDataOraInizio(value.getDataOraInizio());
+            setPrezzo(value.getPrezzo());
             setFilmId(value.getFilmId());
             setSalaId(value.getSalaId());
-            setPrezzo(value.getPrezzo());
             resetChangedOnNotNull();
         }
     }

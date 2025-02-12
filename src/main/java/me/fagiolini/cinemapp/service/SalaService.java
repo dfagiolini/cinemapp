@@ -4,9 +4,10 @@ package me.fagiolini.cinemapp.service;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import me.fagiolini.cinemapp.db.tables.daos.ProiezioneDao;
-import me.fagiolini.cinemapp.db.tables.daos.SalaDao;
 import me.fagiolini.cinemapp.db.tables.pojos.Proiezione;
 import me.fagiolini.cinemapp.db.tables.pojos.Sala;
+import me.fagiolini.cinemapp.repository.ProiezioneRepository;
+import me.fagiolini.cinemapp.repository.SalaRepository;
 
 
 import java.util.List;
@@ -14,34 +15,34 @@ import java.util.List;
 @Singleton
 public class SalaService {
     @Inject
-    private SalaDao salaDao;
+    private SalaRepository salaRepository;
     @Inject
-    private ProiezioneDao proiezioneDao;
+    private ProiezioneRepository proiezioneRepository;
 
     public Sala getSalaById(long id) {
-        return this.salaDao.fetchOneById(id);
+        return this.salaRepository.getSalaById(id);
     }
 
     public List<Sala> getSale() {
-        return this.salaDao.findAll();
+        return this.salaRepository.getAllSala();
     }
 
     public void save(Sala sala) {
-        this.salaDao.insert(sala);
+        this.salaRepository.insertSala(sala);
     }
     public void update(Sala sala) {
-        this.salaDao.update(sala);
+        this.salaRepository.updateSala(sala);
     }
     public void deleteById(long id) {
-        this.salaDao.deleteById(id);
+        this.salaRepository.deleteSala(id);
     }
 
     public List<Sala> getSalaByCinemaId(long cinemaId) {
-        return this.salaDao.fetchByCinemaId(cinemaId);
+        return this.salaRepository.getSalaByCinemaId(cinemaId);
     }
 
     public Sala getSalaByProiezioneId(long proiezioneId) {
-        Proiezione proiezione = proiezioneDao.fetchOneById(proiezioneId);
-        return this.salaDao.fetchOneById(proiezione.getSalaId());
+        Proiezione proiezione = proiezioneRepository.getProiezioneById(proiezioneId);
+        return this.salaRepository.getSalaById(proiezione.getSalaId());
     }
 }

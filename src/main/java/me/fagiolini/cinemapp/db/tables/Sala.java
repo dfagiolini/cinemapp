@@ -71,7 +71,7 @@ public class Sala extends TableImpl<SalaRecord> {
     /**
      * The column <code>cinemapp.sala.capacita</code>.
      */
-    public final TableField<SalaRecord, Integer> CAPACITA = createField(DSL.name("capacita"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<SalaRecord, Integer> CAPACITA = createField(DSL.name("capacita"), SQLDataType.INTEGER, this, "");
 
     /**
      * The column <code>cinemapp.sala.numero</code>.
@@ -153,6 +153,11 @@ public class Sala extends TableImpl<SalaRecord> {
     @Override
     public UniqueKey<SalaRecord> getPrimaryKey() {
         return Keys.SALA_PKEY;
+    }
+
+    @Override
+    public List<UniqueKey<SalaRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.SALA_CINEMA_ID_NUMERO_KEY);
     }
 
     @Override

@@ -4,7 +4,7 @@
 package me.fagiolini.cinemapp.db.tables.daos;
 
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,14 +73,14 @@ public class ProiezioneDao extends DAOImpl<ProiezioneRecord, me.fagiolini.cinema
      * Fetch records that have <code>data_ora_fine BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchRangeOfDataOraFine(LocalDate lowerInclusive, LocalDate upperInclusive) {
+    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchRangeOfDataOraFine(LocalDateTime lowerInclusive, LocalDateTime upperInclusive) {
         return fetchRange(Proiezione.PROIEZIONE.DATA_ORA_FINE, lowerInclusive, upperInclusive);
     }
 
     /**
      * Fetch records that have <code>data_ora_fine IN (values)</code>
      */
-    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchByDataOraFine(LocalDate... values) {
+    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchByDataOraFine(LocalDateTime... values) {
         return fetch(Proiezione.PROIEZIONE.DATA_ORA_FINE, values);
     }
 
@@ -88,15 +88,30 @@ public class ProiezioneDao extends DAOImpl<ProiezioneRecord, me.fagiolini.cinema
      * Fetch records that have <code>data_ora_inizio BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchRangeOfDataOraInizio(LocalDate lowerInclusive, LocalDate upperInclusive) {
+    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchRangeOfDataOraInizio(LocalDateTime lowerInclusive, LocalDateTime upperInclusive) {
         return fetchRange(Proiezione.PROIEZIONE.DATA_ORA_INIZIO, lowerInclusive, upperInclusive);
     }
 
     /**
      * Fetch records that have <code>data_ora_inizio IN (values)</code>
      */
-    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchByDataOraInizio(LocalDate... values) {
+    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchByDataOraInizio(LocalDateTime... values) {
         return fetch(Proiezione.PROIEZIONE.DATA_ORA_INIZIO, values);
+    }
+
+    /**
+     * Fetch records that have <code>prezzo BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchRangeOfPrezzo(Double lowerInclusive, Double upperInclusive) {
+        return fetchRange(Proiezione.PROIEZIONE.PREZZO, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>prezzo IN (values)</code>
+     */
+    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchByPrezzo(Double... values) {
+        return fetch(Proiezione.PROIEZIONE.PREZZO, values);
     }
 
     /**
@@ -127,20 +142,5 @@ public class ProiezioneDao extends DAOImpl<ProiezioneRecord, me.fagiolini.cinema
      */
     public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchBySalaId(Long... values) {
         return fetch(Proiezione.PROIEZIONE.SALA_ID, values);
-    }
-
-    /**
-     * Fetch records that have <code>prezzo BETWEEN lowerInclusive AND
-     * upperInclusive</code>
-     */
-    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchRangeOfPrezzo(Double lowerInclusive, Double upperInclusive) {
-        return fetchRange(Proiezione.PROIEZIONE.PREZZO, lowerInclusive, upperInclusive);
-    }
-
-    /**
-     * Fetch records that have <code>prezzo IN (values)</code>
-     */
-    public List<me.fagiolini.cinemapp.db.tables.pojos.Proiezione> fetchByPrezzo(Double... values) {
-        return fetch(Proiezione.PROIEZIONE.PREZZO, values);
     }
 }
