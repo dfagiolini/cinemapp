@@ -1,1 +1,22 @@
-<p>home works!</p>
+<!-- Carousel Slider -->
+<div class="carousel">
+    <button pButton icon="pi pi-chevron-left" class="p-button-rounded"></button>
+    <h2 class="carousel-title">Copertina film / cinema in questione</h2>
+    <button pButton icon="pi pi-chevron-right" class="p-button-rounded"></button>
+  </div>
+  
+  <!-- Film Grid -->
+  <div class="film-grid">
+    <div class="film-card" *ngFor="let film of films">
+      <p-card class="shadow-2">
+        <img [src]="film.copertina" class="film-image" *ngIf="film.copertina; else noImage">
+        <ng-template #noImage>
+          <img src="assets/no-image.png" class="film-image">
+        </ng-template>
+        <h3 class="film-title">{{ film.titolo }}</h3>
+      </p-card>
+    </div>
+  </div>
+  
+
+  

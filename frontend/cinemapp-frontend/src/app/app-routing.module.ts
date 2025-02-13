@@ -7,7 +7,7 @@ import { ProiezioneListComponent } from './features/proiezione-list/proiezione-l
 import { BookingComponent } from './features/booking/booking.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'cinema', component: CinemaListComponent },
   { path: 'film', component: FilmListComponent },
   { path: 'proiezioni', component: ProiezioneListComponent },

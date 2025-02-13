@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CarouselModule } from 'primeng/carousel';
+import { HomeComponent } from './features/home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CarouselModule } from 'primeng/carousel';
     FormsModule,
     CardModule,
     ToolbarModule,
+    HomeComponent,
   ],
   imports: [
     BrowserAnimationsModule,

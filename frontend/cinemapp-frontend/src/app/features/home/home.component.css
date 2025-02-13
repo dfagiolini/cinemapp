@@ -1,0 +1,31 @@
+.film-grid {
+    display: flex; /* O grid, a seconda del tuo layout desiderato */
+    flex-wrap: wrap; /* Permetti alle card di andare a capo su righe multiple */
+    justify-content: space-around; /* Distribuisci le card uniformemente */
+  }
+  
+  .film-card {
+    width: 300px; /* Larghezza desiderata */
+    margin-bottom: 20px; /* Spazio tra le card */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .film-image {
+    width: 100%; /* L'immagine occupa tutta la larghezza della card */
+    height: auto; /* Mantiene le proporzioni dell'immagine */
+    max-height: 200px; /* Limita l'altezza massima dell'immagine */
+    object-fit: cover; /* Assicura che l'immagine riempia lo spazio senza distorsioni */
+  }
+  
+  .film-title {
+    margin-top: 10px;
+    font-size: 1.2em;
+  }
+  
+  .p-card { /* Stili aggiuntivi per la p-card di PrimeNG */
+    height: 100%; /* oppure un'altezza fissa, es: 400px */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spazio tra immagine e titolo */
+  }
