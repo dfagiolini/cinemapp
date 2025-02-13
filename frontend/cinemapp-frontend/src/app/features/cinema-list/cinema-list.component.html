@@ -1,0 +1,9 @@
+<div class="grid">
+    <div class="col-12 md:col-4" *ngFor="let cinema of cinemas">
+      <p-card [header]="cinema.nome" [subheader]="cinema.indirizzo">
+        <p>Telefono: {{ cinema.telefono }}</p>
+        <p-button label="Vedi Proiezioni" icon="pi pi-search"></p-button>
+      </p-card>
+    </div>
+  </div>
+  

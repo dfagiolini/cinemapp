@@ -1,0 +1,241 @@
+:root {
+    --primary-color: #931F1D;          /* Rosso scuro del cinema */
+    --secondary-color: #1a1a1a;        /* Nero/grigio scuro per lo sfondo */
+    --text-light: #ffffff;             /* Testo chiaro */
+    --text-dark: #333333;              /* Testo scuro */
+    --background-dark: #000000;        /* Sfondo nero */
+    --background-light: #f5f5f5;       /* Sfondo chiaro */
+    --accent-gold: #ffd700;            /* Accenti dorati */
+    --hover-red: #d32f2f;             /* Rosso più chiaro per hover */
+}
+
+/* Reset e stili base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.navbar-brand .logo {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Bottoni */
+.nav-button {
+    background-color: transparent;
+    border: 2px solid var(--text-light);
+    color: var(--text-light);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+}
+
+.nav-button.primary {
+    background-color: var(--text-light);
+    color: var(--primary-color);
+}
+
+.nav-button.primary:hover {
+    background-color: var(--hover-red);
+    border-color: var(--hover-red);
+    color: var(--text-light);
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    width: 250px;
+    padding: 1rem;
+}
+
+.menu-item a {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.menu-item a:hover, 
+.menu-item a.active {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Main Content */
+main {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    padding: 2rem;
+    min-height: calc(100vh - 64px);
+}
+
+/* Card Film */
+.movie-card {
+    background-color: var(--background-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    color: var(--text-light);
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+}
+
+.movie-info {
+    padding: 1rem;
+}
+
+.movie-title {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Proiezioni */
+.screening-time {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.3rem;
+    cursor: pointer;
+}
+
+.screening-time:hover {
+    background-color: var(--hover-red);
+}
+
+.screening-full {
+    background-color: var(--secondary-color);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+
+    .navbar-menu {
+        flex-direction: column;
+    }
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.search-input {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(255,255,255,0.1);
+    color: var(--text-light);
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.search-type {
+    background-color: var(--accent-gold);
+    color: var(--text-dark);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Pulsanti Prenotazione */
+.booking-button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.booking-button:hover {
+    background-color: var(--hover-red);
+}
+
+.booking-button:disabled {
+    background-color: var(--secondary-color);
+    cursor: not-allowed;
+}
+
+/* Rating e Recensioni */
+.rating {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+}
+
+.review-container {
+    background-color: rgba(255,255,255,0.05);
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+ 
+.p-card {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .p-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 20px;
+  }
