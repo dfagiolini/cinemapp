@@ -1,0 +1,35 @@
+<div class="app-container">
+    <!-- Navbar -->
+    <p-toolbar class="navbar">
+      <div class="navbar-title">CINEMAPP</div>
+      <div class="navbar-buttons">
+        <button pButton label="Cinema" class="p-button-text"></button>
+        <button pButton label="Film" class="p-button-text"></button>
+        <button pButton label="Biglietti" class="p-button-text"></button>
+        <button pButton label="Contatti" class="p-button-text"></button>
+      </div>
+    </p-toolbar>
+  
+    <!-- Carousel Slider -->
+    <div class="carousel">
+      <button pButton icon="pi pi-chevron-left" class="p-button-rounded"></button>
+      <h2 class="carousel-title">Copertina film / cinema in questione</h2>
+      <button pButton icon="pi pi-chevron-right" class="p-button-rounded"></button>
+    </div>
+  
+    <!-- Film Grid -->
+    <div class="film-grid">
+      <div class="film-card" *ngFor="let film of films">
+        <p-card class="shadow-2">
+          <img [src]="film.image" class="film-image">
+          <h3 class="film-title">{{ film.title }}</h3>
+        </p-card>
+      </div>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Recapiti mail - Contatti</p>
+    </footer>
+  </div>
+  
