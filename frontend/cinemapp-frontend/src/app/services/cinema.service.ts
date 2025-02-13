@@ -14,5 +14,15 @@ export class CinemaService {
   getCinemas(): Observable<Cinema[]> {
     return this.http.get<Cinema[]>(this.url+"/cinema");
   }
+
+  getCinemaById(id: number): Observable<Cinema> {
+    return this.http.get<Cinema>(`${this.url}/cinema/${id}`);
+  }
+
+  postCinema(cinema: Cinema) {
+    this.http.post<Cinema>(`${this.url}/cinema`, cinema);
+  }
+
+
 }
 

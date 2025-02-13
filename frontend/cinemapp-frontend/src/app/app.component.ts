@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -11,7 +11,7 @@ import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, ButtonModule, ToolbarModule, CardModule, NgForOf],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, ButtonModule, ToolbarModule, CardModule, NgForOf, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
