@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import me.fagiolini.cinemapp.db.tables.daos.SalaDao;
 import me.fagiolini.cinemapp.db.tables.pojos.Proiezione;
+import me.fagiolini.cinemapp.exception.myException;
 import me.fagiolini.cinemapp.repository.ProiezioneRepository;
 import me.fagiolini.cinemapp.repository.SalaRepository;
 import org.jooq.DSLContext;
@@ -34,19 +35,31 @@ public class ProiezioneService {
         return this.proiezioneRepository.getAllProiezioni();
     }
 
-    public void save(Proiezione proiezione) {
+    public void save(Proiezione proiezione) throws myException {
+        int count = getOverlappingCount(proiezione);
+
+        if (count == 0)
+            this.proiezioneRepository.insertProiezione(proiezione);
+        else
+            throw new myException("Errore: la proiezione si sovrappone a una esistente");
+    }
+
+    private int getOverlappingCount(Proiezione proiezione) {
         int count = this.create.select(count()).from(PROIEZIONE)
                 .where(PROIEZIONE.SALA_ID.eq(proiezione.getSalaId()))
                 .and(row(PROIEZIONE.DATA_ORA_INIZIO, PROIEZIONE.DATA_ORA_FINE)
                         .overlaps(proiezione.getDataOraInizio(), proiezione.getDataOraFine()))
                 .fetchOneInto(Integer.class);
-
-        if (count == 0)
-            this.proiezioneRepository.insertProiezione(proiezione);
+        return count;
     }
 
-    public void update(Proiezione proiezione) {
-        this.proiezioneRepository.updateProiezione(proiezione);
+    public void update(Proiezione proiezione) throws myException {
+        int count = getOverlappingCount(proiezione);
+
+        if (count == 0)
+            this.proiezioneRepository.updateProiezione(proiezione);
+        else
+            throw new myException("Errore: la proiezione si sovrappone a una esistente");
     }
 
     public void delete(long id) {

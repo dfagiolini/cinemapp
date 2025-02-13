@@ -1,8 +1,11 @@
 package me.fagiolini.cinemapp.controller;
 
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
+import io.micronaut.http.annotation.Error;
 import jakarta.inject.Inject;
 import me.fagiolini.cinemapp.db.tables.pojos.Prenotazione;
+import me.fagiolini.cinemapp.exception.myException;
 import me.fagiolini.cinemapp.service.PrenotazioneService;
 
 import java.util.List;
@@ -24,13 +27,12 @@ public class PrenotazioneController {
     }
 
     @Post(uri = "/insertPrenotazione")
-    public void insertPrenotazione(@Body Prenotazione p)
-    {
+    public void insertPrenotazione(@Body Prenotazione p) throws myException {
         this.prenotazioneService.save(p);
     }
 
     @Put(uri = "/updatePrenotazione")
-    public void updatePrenotazione(@Body Prenotazione p) {
+    public void updatePrenotazione(@Body Prenotazione p) throws myException {
         this.prenotazioneService.update(p);
     }
 
@@ -38,4 +40,6 @@ public class PrenotazioneController {
     public void deletePrenotazione(@PathVariable long id) {
         this.prenotazioneService.delete(id);
     }
+
+
 }

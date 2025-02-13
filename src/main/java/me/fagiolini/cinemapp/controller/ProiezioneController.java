@@ -3,6 +3,7 @@ package me.fagiolini.cinemapp.controller;
 import io.micronaut.http.annotation.*;
 import jakarta.inject.Inject;
 import me.fagiolini.cinemapp.db.tables.pojos.Proiezione;
+import me.fagiolini.cinemapp.exception.myException;
 import me.fagiolini.cinemapp.service.ProiezioneService;
 
 import java.util.List;
@@ -23,12 +24,12 @@ public class ProiezioneController {
     }
 
     @Post(uri = "/insertProiezione")
-    public void insertProiezione(@Body Proiezione proiezione) {
+    public void insertProiezione(@Body Proiezione proiezione) throws myException {
         this.proiezioneService.save(proiezione);
     }
 
     @Put(uri = "/updateProiezione")
-    public void updateProiezione(@Body Proiezione proiezione) {
+    public void updateProiezione(@Body Proiezione proiezione) throws myException {
         this.proiezioneService.update(proiezione);
     }
 
