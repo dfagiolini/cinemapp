@@ -1,0 +1,19 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+  <input pInputText [(ngModel)]="film.titolo" placeholder="Titolo" name="titolo"/>
+  <br/>
+  <input pInputText [(ngModel)]="film.durata" placeholder="Durata" name="durata"/>
+  <br/>
+  <input pInputText [(ngModel)]="film.regia" placeholder="Regia" name="regia"/>
+  <br/>
+  <input pInputText [(ngModel)]="film.genere" placeholder="Genere" name="genere"/>
+  <br/>
+  <input pInputText [(ngModel)]="film.copertina" placeholder="Copertina" name="copertina"/>
+  <br/>
+  <input type="submit" value="submit">
+
+</form>
+
+
+
+
+

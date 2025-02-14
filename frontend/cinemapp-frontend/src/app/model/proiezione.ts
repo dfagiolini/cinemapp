@@ -1,5 +1,5 @@
 export interface Proiezione {
-  id: number;
+  id: number | null;
   dataOraInizio: Date;
   dataOraFine: Date;
   prezzo: number;

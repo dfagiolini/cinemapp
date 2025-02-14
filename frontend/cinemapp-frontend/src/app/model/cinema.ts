@@ -1,6 +1,6 @@
 export interface Cinema {
   nome: string;
-  id: number;
+  id: number | null;
   telefono: string;
   indirizzo: string;
 }

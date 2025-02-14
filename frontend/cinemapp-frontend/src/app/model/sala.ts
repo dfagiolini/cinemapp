@@ -1,5 +1,5 @@
 export interface Sala {
-  id: number;
+  id: number | null;
   cinemaId: number;
   capacita: number;
   numero: string;

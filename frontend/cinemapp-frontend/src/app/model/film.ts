@@ -1,9 +1,11 @@
 export interface Film {
-  id: number;
+  id: number | null;
   durata: number;
   copertina: string;
   genere: string;
   regia: string;
   titolo: string;
 }
+
+
 

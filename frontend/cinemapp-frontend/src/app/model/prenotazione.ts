@@ -1,5 +1,5 @@
 export interface Prenotazione {
-  id: number;
+  id: number | null;
   numeroBiglietti: number;
   dataPrenotazione: Date;
   proiezioneId: number;

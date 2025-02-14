@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Film} from '../model/film';
 
@@ -19,15 +19,15 @@ export class FilmService {
     return this.http.get<Film>(`${this.url}/film/${id}`);
   }
 
-  postFilm(film: Film) {
-    this.http.post<Film>(`${this.url}/film`, film);
+  postFilm(film: Film): Observable<HttpResponse<void>> {
+    return this.http.post<HttpResponse<void>>(`${this.url}/insertFilm`, film);
   }
 
-  deleteFilmById(id: number) {
-    this.http.delete<Film>(`${this.url}/film/${id}`);
+  deleteFilmById(id: number): Observable<HttpResponse<void>> {
+    return this.http.delete<HttpResponse<void>>(`${this.url}/deleteFilm/${id}`);
   }
 
-  updateFilm(film: Film) {
-    this.http.put<Film>(`${this.url}/film`, film);
+  updateFilm(film: Film):Observable<HttpResponse<void>> {
+    return this.http.put<HttpResponse<void>>(`${this.url}/updateFilm`, film);
   }
 }

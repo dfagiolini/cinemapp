@@ -5,12 +5,13 @@ import { CardModule } from 'primeng/card';
 import { MenubarModule } from 'primeng/menubar';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './core/navbar/navbar.component';
-import { FooterComponent } from './core/footer/footer.component';  
+import { FooterComponent } from './core/footer/footer.component';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CarouselModule } from 'primeng/carousel';
 import { HomeComponent } from './features/home/home.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,13 @@ import { HomeComponent } from './features/home/home.component';
     ButtonModule,
     CardModule,
     MenubarModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     CardModule,
     ToolbarModule,
     CarouselModule,
+    FormsModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
