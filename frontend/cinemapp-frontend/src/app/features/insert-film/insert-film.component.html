@@ -1,3 +1,32 @@
+<div>
+  <label for="filmDropdown">Select Film:</label>
+  <select id="filmDropdown" (change)="onFilmSelect($event)">
+    <option *ngFor="let film of films; let i = index" [value]="film.id">{{ film.titolo }}</option>
+  </select>
+</div>
+
+<form [formGroup]="filmForm">
+  <label for="titolo">Titolo:</label>
+  <input id="titolo" formControlName="titolo" />
+
+  <label for="durata">Durata:</label>
+  <input id="durata" formControlName="durata" type="number" />
+
+  <label for="regia">Regia:</label>
+  <input id="regia" formControlName="regia" />
+
+  <label for="genere">Genere:</label>
+  <input id="genere" formControlName="genere" />
+
+  <label for="copertina">Copertina:</label>
+  <input id="copertina" formControlName="copertina" />
+
+  <button (click)="onUpdate()" type="button">Update</button>
+  <button (click)="onDelete()" type="button">Delete</button>
+
+</form>
+
+
 <form #form="ngForm" (ngSubmit)="onSubmit()">
   <input pInputText [(ngModel)]="film.titolo" placeholder="Titolo" name="titolo"/>
   <br/>
@@ -12,6 +41,8 @@
   <input type="submit" value="submit">
 
 </form>
+
+
 
 
 

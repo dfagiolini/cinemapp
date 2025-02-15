@@ -25,4 +25,8 @@ export class ProiezioneService {
   updateProiezione(proiezione: Proiezione): Observable<HttpResponse<void>> {
     return this.http.put<HttpResponse<void>>(`${this.url}/updateProiezione`,proiezione);
   }
+
+  getDisponibilita(proiezioneId: number): Observable<number>{
+    return this.http.get<number>(`${this.url}/getDisponibilita/${proiezioneId}`);
+  }
 }
