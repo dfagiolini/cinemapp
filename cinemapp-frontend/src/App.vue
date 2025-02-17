@@ -9,7 +9,9 @@ import menubar from "@/components/menubar.vue";
     <header class="menubar">
     <menubar />
     </header>
+    <div class ="content">
     <RouterView />
+    </div>
   </div>
 
 
@@ -23,20 +25,18 @@ body, html, #app {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  flex-flow: column;
 }
 
-
-
 .menubar {
-  margin-top: 1%;
-  padding-top: 1%;
-  margin-bottom: 0;
-  position: relative;
-  top: 0;
   width: 100%;
 }
 
-
+.content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+}
 </style>

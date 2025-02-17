@@ -1,7 +1,8 @@
 
 <template>
+  <router-link :to="{ name: 'ProgrammazioneFilm', params: { id: film.id } }" class = "no-decoration">
   <div class="film-card">
-    <card>
+    <card >
       <template #header>
         <img :src="film.copertina" alt="Film Poster" class="film-poster" />
       </template>
@@ -13,28 +14,22 @@
       </template>
     </card>
   </div>
+  </router-link>
 </template>
 
-<script lang="ts">
-import { defineComponent, type PropType } from 'vue';
+<<script setup lang="ts">
+import { defineProps } from 'vue';
+import { RouterLink } from 'vue-router';
+import Card from 'primevue/card';
+import type { Film } from '@/model/film.ts';
 
-import Card  from 'primevue/card';
-import type {Film} from "@/model/film.ts";
-
-
-export default defineComponent({
-  name: 'FilmCard',
-  components: {
-    Card,
-  },
-  props: {
-    film: {
-      type: Object as PropType<Film>,
-      required: true,
-    },
-  },
-});
+// Define props
+const props = defineProps<{
+  film: Film;
+}>();
 </script>
+
+
 
 <style scoped>
 .film-card {
@@ -43,5 +38,9 @@ export default defineComponent({
 .film-poster {
   width: 100%;
   height: auto;
+}
+.no-decoration {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
