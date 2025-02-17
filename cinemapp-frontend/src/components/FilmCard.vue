@@ -4,7 +4,7 @@
   <div class="film-card">
     <card >
       <template #header>
-        <img :src="film.copertina" alt="Film Poster" class="film-poster" />
+        <img :src="`/${film.copertina}`" alt="Film Poster" class="film-poster" />
       </template>
       <template #title>{{ film.titolo }}</template>
       <template #subtitle>{{ film.regia }}</template>

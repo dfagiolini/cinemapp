@@ -3,60 +3,54 @@ import { ref } from 'vue';
 import { Card, Badge, Divider } from 'primevue';
 import type {Cinema} from "@/model/cinema.ts";
 import type {Proiezione} from "@/model/proiezione.ts";
-import type {ProgrammazioneFilm} from "@/model/programmazione-film.ts";
+import type {ProgrammazioneCinemaModel} from "@/model/programmazione-cinema-model.ts";
 import Service from "@/services/service.ts";
 import { useRoute } from 'vue-router';
 import FilmCard from "@/components/FilmCard.vue";
-import type {Film} from "@/model/film.ts";
+
+
 
 const route = useRoute()
-const programmazione = ref<ProgrammazioneFilm[]>([]);
-const film = ref<Film>();
+const programmazione = ref<ProgrammazioneCinemaModel[]>([]);
+const cinema = ref<Cinema>();
+
+
 
 const fetchProgrammazione = async () => {
   try {
-    programmazione.value = await Service.get<ProgrammazioneFilm[]>(`/ProgrammazioneFilm/${route.params.id}`);
+    programmazione.value = await Service.get<ProgrammazioneCinemaModel[]>(`/ProgrammazioneCinema/${route.params.id}`);
   } catch (error) {
     console.log(error);
   }
 }
 
-const fetchFilm = async () => {
+const fetchCinema = async () => {
   try {
-    if(!Array.isArray(route.params.id)){
-      film.value = await Service.get<Film>('/film/'+route.params.id);
-    }
-
-
+    cinema.value = await Service.get<Cinema>(`/cinema/${route.params.id}`);
   }
-  catch(error) {
+  catch (error) {
     console.log(error);
   }
 }
-fetchFilm();
+fetchCinema();
 fetchProgrammazione();
 </script>
 
 <template>
-
   <div class="programmazione-container">
-    <div class="filmCard">
-    <film-card v-if="film" :film=film />
-    </div>
-    <div v-for="p in programmazione" :key="p.cinema.id ?? 'unknown-cinema-id'" class="cinema">
-      <Card class="cinema-card p-card">
-        <template #title>
-          <div class="cinema-header p-card-header">
-            <router-link :to="{name:'ProgrammazioneCinema', params:{id:p.cinema.id} }">
-            <h2>{{ p.cinema.nome }}</h2>
-            </router-link>
-            <Badge value="Cinema"></Badge>
+    <Card><template #title v-if="cinema">{{ cinema.nome }} </template></Card>
+    <div v-for="p in programmazione" :key="p.film.id ?? 'unknown-film-id'" class="film">
+      <div class="filmCard">
+        <film-card v-if="p.film" :film=p.film />
+      </div>
+      <Card class="film-card p-card">
+
+          <div class="film-header p-card-header">
+
           </div>
-        </template>
+
         <template #content>
-          <p>Indirizzo: {{ p.cinema.indirizzo }}</p>
-          <p>Telefono: {{ p.cinema.telefono }}</p>
-          <Divider></Divider>
+
           <h3>Proiezioni</h3>
           <div class="proiezioni">
             <Card v-for="proiezione in p.proiezioni" :key="proiezione.id ?? 'unknown-proiezione-id'" class="proiezione-card">
@@ -76,7 +70,6 @@ fetchProgrammazione();
   </div>
 </template>
 
-
 <style scoped>
 body {
   margin: 0;
@@ -94,12 +87,12 @@ body {
   box-sizing: border-box;
 }
 
-.cinema {
+.film {
   width: 100%;
   margin-bottom: 20px;
 }
 
-.cinema-card {
+.film-card {
   width: 100%;
   padding: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -107,14 +100,14 @@ body {
   background-color: #7FFFD4;
 }
 
-.cinema-header {
+.film-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.cinema-content {
+.film-content {
   display: flex;
   flex-direction: column;
 }
@@ -152,12 +145,9 @@ body {
   border-radius: 3px;
   font-size: 0.8em;
 }
-
 .filmCard {
   width: 20%;
   align-self: center;
 }
 
 </style>
-
-

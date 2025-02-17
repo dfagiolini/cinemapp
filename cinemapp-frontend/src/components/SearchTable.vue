@@ -46,8 +46,16 @@
     </div>
 
     <DataTable :value="tableData" :paginator="true" :rows="10">
-      <Column field="cinema.nome" header="Cinema"></Column>
-      <Column field="film.titolo" header="Film"></Column>
+      <Column  header="Cinema">
+        <template #body="{data}">
+          <router-link :to="{ name: 'ProgrammazioneCinema', params: { id:data.cinema.id }}"> {{ data.cinema.nome }}
+          </router-link>
+        </template>
+      </Column>
+      <Column  header="Film"><template #body="{data}">
+        <router-link :to="{ name: 'ProgrammazioneFilm', params: { id:data.film.id }}"> {{ data.film.titolo }}
+        </router-link>
+      </template></Column>
       <Column field="proiezione.dataOraInizio" header="Orario"></Column>
     </DataTable>
   </div>
