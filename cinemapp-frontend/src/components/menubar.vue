@@ -25,19 +25,19 @@ const adminItems = ref([
       },
       {
         label: 'Cinema',
-        command: () => { router.push('/cinema') }
+        command: () => { router.push('/cinemaCRUD') }
       },
       {
         label: 'Proiezioni',
-        command: () => { router.push('/proiezioni') }
+        command: () => { router.push('/proiezioniCRUD') }
       },
       {
         label: 'Prenotazioni',
-        command: () => { router.push('/prenotazioni') }
+        command: () => { router.push('/prenotazioniCRUD') }
       },
       {
         label: 'Sale',
-        command: () => { router.push('/sale') }
+        command: () => { router.push('/saleCRUD') }
       }
     ]
   }

@@ -4,6 +4,9 @@ import FilmCarousel from "@/components/FilmCarousel.vue";
 import Home from "@/components/Home.vue";
 import ProgrammazioneCinema from "@/components/ProgrammazioneCinema.vue";
 import FilmCRUD from "@/components/FilmCRUD.vue";
+import CinemaCRUD from "@/components/CinemaCRUD.vue";
+import SalaCRUD from "@/components/SalaCRUD.vue";
+import ProiezioneCRUD from "@/components/ProiezioneCRUD.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +33,20 @@ const router = createRouter({
       path: '/filmCRUD',
       name: 'FilmCRUD',
       component: FilmCRUD,
+    },
+    {
+      path: '/cinemaCRUD',
+      name: 'CinemaCRUD',
+      component: CinemaCRUD,
+    },
+    {
+      path: '/saleCRUD',
+      name: 'SaleCRUD',
+      component: SalaCRUD,
+    },{
+      path: '/proiezioniCRUD',
+      name: 'ProiezioniCRUD',
+      component: ProiezioneCRUD,
     }
 
   ],
