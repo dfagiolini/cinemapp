@@ -8,6 +8,7 @@ import CinemaCRUD from "@/components/CinemaCRUD.vue";
 import SalaCRUD from "@/components/SalaCRUD.vue";
 import ProiezioneCRUD from "@/components/ProiezioneCRUD.vue";
 import PrenotazioneCRUD from "@/components/PrenotazioneCRUD.vue";
+import Login from "@/components/Login.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,6 +54,10 @@ const router = createRouter({
       path: '/prenotazioniCRUD',
       name: 'PrenotazioniCRUD',
       component: PrenotazioneCRUD,
+    }, {
+      path: '/login',
+      name: 'login',
+      component: Login,
     }
 
   ],

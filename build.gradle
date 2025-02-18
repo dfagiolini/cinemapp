@@ -28,9 +28,10 @@ dependencies {
     implementation("io.micronaut.jsonschema:micronaut-json-schema-annotations")
     implementation("io.micronaut.reactor:micronaut-reactor")
     implementation("io.micronaut.security:micronaut-security")
-    implementation("io.micronaut.security:micronaut-security-csrf")
     implementation("io.micronaut.security:micronaut-security-jwt")
-    implementation("io.micronaut.security:micronaut-security-session")
+    implementation("org.springframework.security:spring-security-crypto:6.2.0")
+    implementation("org.slf4j:jcl-over-slf4j")
+    implementation 'com.auth0:java-jwt:4.5.0'
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.sql:micronaut-jooq")

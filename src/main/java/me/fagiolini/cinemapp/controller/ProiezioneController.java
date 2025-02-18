@@ -1,6 +1,8 @@
 package me.fagiolini.cinemapp.controller;
 
 import io.micronaut.http.annotation.*;
+import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
 import jakarta.inject.Inject;
 import me.fagiolini.cinemapp.db.tables.pojos.Proiezione;
 import me.fagiolini.cinemapp.exception.myException;
@@ -13,11 +15,12 @@ public class ProiezioneController {
     @Inject
     ProiezioneService proiezioneService;
 
+    @Secured(SecurityRule.IS_ANONYMOUS)
     @Get(uri = "/proiezioni")
     public List<Proiezione> proiezioni() {
         return this.proiezioneService.getProiezioni();
     }
-
+    @Secured(SecurityRule.IS_ANONYMOUS)
     @Get(uri = "/proiezione/{id}")
     public Proiezione proiezione(@PathVariable Integer id) {
         return this.proiezioneService.getProiezioneById(id);
@@ -37,6 +40,7 @@ public class ProiezioneController {
     public void delete(@PathVariable long id) {
         this.proiezioneService.delete(id);
     }
+    @Secured(SecurityRule.IS_ANONYMOUS)
     @Get(uri = "/getDisponibilita/{id}")
     public int getDisponibilita(@PathVariable long id) {
         return this.proiezioneService.getDisponibilita(id);

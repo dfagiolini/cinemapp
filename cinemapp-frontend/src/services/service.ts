@@ -1,6 +1,7 @@
 
 
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
+import {useAuthStore} from "@/stores/auth.ts";
 
 class Service {
   private apiClient: AxiosInstance;
@@ -12,9 +13,24 @@ class Service {
         'Content-Type': 'application/json',
       },
     });
+
+    this.apiClient.interceptors.request.use(
+      (config) => {
+        const authStore = useAuthStore();
+        const token = authStore.token;
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
   }
 
-  public async get<T>(endpoint: string): Promise<T> {
+
+public async get<T>(endpoint: string): Promise<T> {
     try {
       const response: AxiosResponse<T> = await this.apiClient.get(endpoint);
       return response.data;

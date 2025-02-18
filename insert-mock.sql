@@ -44,12 +44,13 @@ VALUES
 
 -- Inserimento dati negli utenti
 INSERT INTO cinemapp.utente (ruolo, email, nome, password)
-VALUES 
-(0, 'user1@example.com', 'User 1', 'password1'),
-(1, 'user2@example.com', 'User 2', 'password2'),
-(0, 'user3@example.com', 'User 3', 'password3'),
-(1, 'user4@example.com', 'User 4', 'password4'),
-(0, 'user5@example.com', 'User 5', 'password5');
+VALUES
+(1, 'user1@example.com', 'User 1', '$2a$10$Ji2DE.oF9bX43HpeP.2rPu2lrSBVfFyhigV7Mh0KsEO7ysVMsBo8G'),
+(1, 'user2@example.com', 'User 2', '$2a$10$PpDe9ik71kVhtPRkyn2GYuu8j2rrTCNwHTMA6RrTN/6lzVEObim1K'),
+(1, 'user3@example.com', 'User 3', '$2a$10$UEBaAUiIsvdH30.T.ayONugW7FLHExsdVAIT/bS/kHXMGIuE7bhPu'),
+(1, 'user4@example.com', 'User 4', '$2a$10$V6MWHgFBQwyGRN8XWcawoO.UcbOs0yW2nv1JRrSy6IKj/yKyOpooq'),
+(1, 'user5@example.com', 'User 5', '$2a$10$S4bNOTZ4MCrHhumc7sTKIesiuKDrbNnkzGWICgpPK.hTDWTWB6DT2'),
+(0, 'admin@cinemapp.cinemapp', 'Admin', '$2a$10$0WrHzEFIq01P4MZBGspvZ.xyBgwAaYoKZtUjczENwbBYMFTrl2FkW');
 
 -- Inserimento dati nelle prenotazioni
 INSERT INTO cinemapp.prenotazione (data_prenotazione, numero_biglietti, proiezione_id, utente_id)
