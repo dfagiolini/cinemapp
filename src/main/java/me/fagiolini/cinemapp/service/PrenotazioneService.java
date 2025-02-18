@@ -63,5 +63,8 @@ public class PrenotazioneService {
         return HttpResponse.notModified().body(e.getMessage());
     }
 
+    public List<Prenotazione> getPrenotazioniByUserId(Long userId) {
+        return this.prenotazioneRepository.findAllByUserId(userId);
+    }
 
 }

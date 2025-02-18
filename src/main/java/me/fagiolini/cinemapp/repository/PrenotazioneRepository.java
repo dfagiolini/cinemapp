@@ -41,4 +41,8 @@ public class PrenotazioneRepository {
     public void deleteById(Long id) {
         this.prenotazioneDao.deleteById(id);
     }
+
+    public List<Prenotazione> findAllByUserId(Long userId) {
+        return this.prenotazioneDao.fetchByUtenteId(userId);
+    }
 }

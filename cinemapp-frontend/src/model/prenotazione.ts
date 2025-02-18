@@ -3,5 +3,5 @@ export interface Prenotazione {
   numeroBiglietti: number;
   dataPrenotazione: Date;
   proiezioneId: number;
-  utenteId: number;
+  utenteId: number | null;
 }

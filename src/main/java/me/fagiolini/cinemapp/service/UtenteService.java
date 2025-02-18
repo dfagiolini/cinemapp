@@ -55,6 +55,7 @@ public class UtenteService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", utente.getNome());
         claims.put("role", String.valueOf(utente.getRuolo()));
+        claims.put("id", String.valueOf(utente.getId()));
 
         return jwtTokenGenerator.generateToken(claims);
     }

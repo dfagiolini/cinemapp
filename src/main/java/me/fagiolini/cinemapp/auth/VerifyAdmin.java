@@ -1,4 +1,4 @@
-package me.fagiolini.cinemapp.Auth;
+package me.fagiolini.cinemapp.auth;
 
 import io.micronaut.http.HttpRequest;
 import me.fagiolini.cinemapp.exception.myException;

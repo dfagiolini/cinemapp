@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import io.micronaut.http.HttpRequest;
 
 public class JwtUtil {
 
@@ -25,6 +26,17 @@ public class JwtUtil {
         DecodedJWT decodedJWT = verifyToken(token);
         if (decodedJWT != null) {
             return Integer.parseInt(decodedJWT.getClaim("role").toString().replace("\"",""));
+        }
+        return -1;
+    }
+
+    public static long getUserIdFromRequest(HttpRequest<?> request) {
+        String authorizationHeader = request.getHeaders().get("Authorization");
+        String token = authorizationHeader.substring(7);
+        token = token.strip();
+        DecodedJWT decodedJWT = verifyToken(token);
+        if (decodedJWT != null) {
+            return Long.parseLong(decodedJWT.getClaim("id").toString().replace("\"",""));
         }
         return -1;
     }

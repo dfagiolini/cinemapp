@@ -1,9 +1,11 @@
 package me.fagiolini.cinemapp.controller;
 
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import jakarta.inject.Inject;
+import me.fagiolini.cinemapp.auth.VerifyAdmin;
 import me.fagiolini.cinemapp.db.tables.pojos.Proiezione;
 import me.fagiolini.cinemapp.exception.myException;
 import me.fagiolini.cinemapp.service.ProiezioneService;
@@ -25,20 +27,23 @@ public class ProiezioneController {
     public Proiezione proiezione(@PathVariable Integer id) {
         return this.proiezioneService.getProiezioneById(id);
     }
-
+    @Secured(SecurityRule.IS_AUTHENTICATED)
     @Post(uri = "/insertProiezione")
-    public void insertProiezione(@Body Proiezione proiezione) throws myException {
-        this.proiezioneService.save(proiezione);
+    public void insertProiezione(@Body Proiezione proiezione, HttpRequest<?> request) throws myException {
+        if(VerifyAdmin.verify(request))
+            this.proiezioneService.save(proiezione);
     }
-
+    @Secured(SecurityRule.IS_AUTHENTICATED)
     @Put(uri = "/updateProiezione")
-    public void updateProiezione(@Body Proiezione proiezione) throws myException {
-        this.proiezioneService.update(proiezione);
+    public void updateProiezione(@Body Proiezione proiezione, HttpRequest<?> request) throws myException {
+        if(VerifyAdmin.verify(request))
+            this.proiezioneService.update(proiezione);
     }
-
+    @Secured(SecurityRule.IS_AUTHENTICATED)
     @Delete(uri = "/deleteProiezione/{id}")
-    public void delete(@PathVariable long id) {
-        this.proiezioneService.delete(id);
+    public void delete(@PathVariable long id, HttpRequest<?> request) throws myException {
+        if(VerifyAdmin.verify(request))
+            this.proiezioneService.delete(id);
     }
     @Secured(SecurityRule.IS_ANONYMOUS)
     @Get(uri = "/getDisponibilita/{id}")

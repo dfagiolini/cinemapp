@@ -8,7 +8,7 @@ import jakarta.inject.Inject;
 import me.fagiolini.cinemapp.db.tables.pojos.Sala;
 import me.fagiolini.cinemapp.exception.myException;
 import me.fagiolini.cinemapp.service.SalaService;
-import me.fagiolini.cinemapp.Auth.VerifyAdmin;
+import me.fagiolini.cinemapp.auth.VerifyAdmin;
 
 
 import java.util.List;
@@ -33,16 +33,17 @@ public class SalaController {
         if (VerifyAdmin.verify(request))
             this.salaService.save(sala);
     }
-
+    @Secured(SecurityRule.IS_AUTHENTICATED)
     @Put(uri = "/updateSala")
     public void updateSala(@Body Sala sala, HttpRequest<?> request) throws myException {
         if(VerifyAdmin.verify(request))
             this.salaService.update(sala);
     }
-
+    @Secured(SecurityRule.IS_AUTHENTICATED)
     @Delete(uri = "/deleteSala")
-    public void deleteSala(long id) {
-        this.salaService.deleteById(id);
+    public void deleteSala(long id, HttpRequest<?> request) throws myException {
+        if(VerifyAdmin.verify(request))
+            this.salaService.deleteById(id);
     }
     @Secured(SecurityRule.IS_ANONYMOUS)
     @Get(uri = "/salaByCinema/{id}")
