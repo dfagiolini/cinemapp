@@ -36,7 +36,7 @@ public class JwtUtil {
         token = token.strip();
         DecodedJWT decodedJWT = verifyToken(token);
         if (decodedJWT != null) {
-            return Long.parseLong(decodedJWT.getClaim("id").toString().replace("\"",""));
+            return Long.parseLong(decodedJWT.getClaim("sub").toString().replace("\"",""));
         }
         return -1;
     }
