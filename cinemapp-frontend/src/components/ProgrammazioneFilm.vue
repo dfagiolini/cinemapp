@@ -91,9 +91,6 @@ const enrichProgrammazioneWithDisponibilita = async () => {
   programmazioneConDisp.value = enrichedProgrammazione;
 }
 
-  console.log('Enriched Programmazione:', programmazioneConDisp.value); // Debugging log
-}
-
 onMounted(async () => {
   await fetchFilm();
   await fetchProgrammazione();
@@ -141,13 +138,11 @@ onMounted(async () => {
       </Card>
     </div>
   </div>
-  <div>
-    <PrenotazioneComponent v-model:visible="isModalVisible" :proiezioneId="selectedProiezioneId" @close="closeModal" />
-  </div>
-</template>
-
-
-
+  <PrenotazioneComponent
+    :visible="isModalVisible"
+    :proiezioneId="selectedProiezioneId"
+    @update:visible="isModalVisible = $event"
+  /></template>
 
 <style scoped>
 body {

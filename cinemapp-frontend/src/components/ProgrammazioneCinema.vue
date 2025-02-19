@@ -127,8 +127,11 @@ onMounted(async () => {
         </template>
       </Card>
     </div>
-    <PrenotazioneComponent v-model:visible="isModalVisible" :proiezioneId="selectedProiezioneId" @close="closeModal" />
-  </div>
+    <PrenotazioneComponent
+      :visible="isModalVisible"
+      :proiezioneId="selectedProiezioneId"
+      @update:visible="isModalVisible = $event"
+    />  </div>
 </template>
 
 <style scoped>

@@ -1,10 +1,16 @@
 <template>
-  <Dialog header="Prenotazione" :visible="visible" modal @close="closeModal">
+  <Dialog
+    header="Prenotazione"
+    v-model:visible="dialogVisible"
+    modal
+    :closable="true"
+    :closeOnEscape="true"
+  >
     <Card>
       <template #content>
-        <p><strong>Inizio:</strong> {{ proiezione.dataOraInizio }}</p>
-        <p><strong>Fine:</strong> {{ proiezione.dataOraFine }}</p>
-        <p><strong>Prezzo:</strong> {{ proiezione.prezzo }}€</p>
+        <p><strong>Inizio:</strong> {{ proiezione?.dataOraInizio }}</p>
+        <p><strong>Fine:</strong> {{ proiezione?.dataOraFine }}</p>
+        <p><strong>Prezzo:</strong> {{ proiezione?.prezzo }}€</p>
       </template>
     </Card>
     <form @submit.prevent="submitBooking">
@@ -18,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import {ref, watch, defineProps, defineEmits, computed} from 'vue';
 import Dialog from 'primevue/dialog';
 import InputNumber from 'primevue/inputnumber';
 import Button from 'primevue/button';
@@ -31,12 +37,25 @@ const props = defineProps<{
   visible: boolean;
   proiezioneId: number | null;
 }>();
-
-const emit = defineEmits(['close']);
+const dialogVisible = computed({
+  get: () => props.visible,
+  set: (value) => {
+    emit('update:visible', value);
+    if (!value) emit('close');
+  }
+});
+const emit = defineEmits(['update:visible', 'close']);
 
 const numeroBiglietti = ref<number>(0);
 const maxTickets = ref<number>(0);
-const proiezione = ref<Proiezione>({ id: null, dataOraFine: null, dataOraInizio: null, filmId: -1, prezzo: 0, salaId: -1 });
+const proiezione = ref<Proiezione>({
+  id: null,
+  dataOraFine: null,
+  dataOraInizio: null,
+  filmId: -1,
+  prezzo: 0,
+  salaId: -1
+});
 
 watch(
   () => props.proiezioneId,
@@ -72,8 +91,8 @@ const checkAvailability = async (id: number) => {
 };
 
 const closeModal = () => {
+  emit('update:visible', false);
   emit('close');
-
 };
 
 const submitBooking = async () => {
@@ -94,6 +113,8 @@ const submitBooking = async () => {
   }
 };
 </script>
+
+
 
 <style scoped>
 .p-field {
