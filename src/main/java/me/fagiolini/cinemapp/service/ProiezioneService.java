@@ -44,13 +44,13 @@ public class ProiezioneService {
             throw new myException("Errore: la proiezione si sovrappone a una esistente");
     }
 
-    private int getOverlappingCount(Proiezione proiezione) {
-        int count = this.create.select(count()).from(PROIEZIONE)
+    private Integer getOverlappingCount(Proiezione proiezione) {
+        return this.create.select(count()).from(PROIEZIONE)
                 .where(PROIEZIONE.SALA_ID.eq(proiezione.getSalaId()))
                 .and(row(PROIEZIONE.DATA_ORA_INIZIO, PROIEZIONE.DATA_ORA_FINE)
                         .overlaps(proiezione.getDataOraInizio(), proiezione.getDataOraFine()))
-                .fetchOneInto(Integer.class);
-        return count;
+                .fetchOptionalInto(Integer.class).orElse(0);
+
     }
 
     public void update(Proiezione proiezione) throws myException {
@@ -68,8 +68,9 @@ public class ProiezioneService {
 
     public int getDisponibilita(long proiezioneId) {
         Proiezione proiezione = proiezioneRepository.getProiezioneById(proiezioneId);
+        Integer giaPrenotati = this.create.select(sum(PRENOTAZIONE.NUMERO_BIGLIETTI)).from(PRENOTAZIONE)
+                .where(PRENOTAZIONE.PROIEZIONE_ID.eq(proiezione.getId())).fetchOptionalInto(Integer.class).orElse(0);
         return this.salaRepository.getSalaById(proiezione.getSalaId()).getCapacita()
-                - this.create.select(sum(PRENOTAZIONE.NUMERO_BIGLIETTI)).from(PRENOTAZIONE)
-                .where(PRENOTAZIONE.PROIEZIONE_ID.eq(proiezione.getId())).fetchOneInto(Integer.class);
+                - giaPrenotati;
     }
 }

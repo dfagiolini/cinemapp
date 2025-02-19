@@ -1,22 +1,16 @@
 <template>
-  <Dialog header="Prenotazione" :visible.sync="visible" modal>
+  <Dialog header="Prenotazione" :visible="visible" modal @hide="closeModal">
     <Card>
-    <template #content>
-      <p><strong>Inizio:</strong> {{ proiezione.dataOraInizio }}</p>
-      <p><strong>Fine:</strong> {{ proiezione.dataOraFine }}</p>
-      <p><strong>Prezzo:</strong> {{ proiezione.prezzo }}€</p>
-    </template>
+      <template #content>
+        <p><strong>Inizio:</strong> {{ proiezione.dataOraInizio }}</p>
+        <p><strong>Fine:</strong> {{ proiezione.dataOraFine }}</p>
+        <p><strong>Prezzo:</strong> {{ proiezione.prezzo }}€</p>
+      </template>
     </Card>
     <form @submit.prevent="submitBooking">
       <div class="p-field">
         <label for="numeroBiglietti">Numero di Biglietti</label>
-        <InputNumber
-          id="numeroBiglietti"
-          v-model="numeroBiglietti"
-          :max="maxTickets"
-          required
-          @input="checkAvailability"
-        />
+        <InputNumber id="numeroBiglietti" v-model="numeroBiglietti" :max="maxTickets" required />
       </div>
       <Button type="submit" label="Prenota" />
     </form>
@@ -24,47 +18,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, watch } from 'vue';
 import Dialog from 'primevue/dialog';
 import InputNumber from 'primevue/inputnumber';
 import Button from 'primevue/button';
-import Card from "primevue/card";
-import { useRoute } from 'vue-router';
-import Service from "@/services/service";
-import type { Prenotazione } from "@/model/prenotazione";
-import type {Proiezione} from "@/model/proiezione.ts";
+import Card from 'primevue/card';
+import Service from '@/services/service';
+import type { Proiezione } from '@/model/proiezione';
+import type { Prenotazione } from '@/model/prenotazione';
 
-// Declare refs with their types
-const visible = ref<boolean>(true);
+const props = defineProps<{
+  visible: boolean;
+  proiezioneId: number | null;
+}>();
+
+const emit = defineEmits(['close']);
+
 const numeroBiglietti = ref<number>(0);
 const maxTickets = ref<number>(0);
-const proiezioneId = ref<number | null>(null);
-const proiezione = ref<Proiezione>({id: null, dataOraFine: null, dataOraInizio: null, filmId: -1, prezzo: 0, salaId: -1});
+const proiezione = ref<Proiezione>({ id: null, dataOraFine: null, dataOraInizio: null, filmId: -1, prezzo: 0, salaId: -1 });
 
-const route = useRoute();
+watch(
+  () => props.proiezioneId,
+  (newId) => {
+    if (newId !== null) {
+      fetchProiezione(newId);
+      checkAvailability(newId);
+    }
+  },
+  { immediate: true }
+);
 
-onMounted(() => {
-  if (route.params.proiezioneId && !Array.isArray(route.params.proiezioneId)) {
-    proiezioneId.value = parseInt(route.params.proiezioneId, 10);
-    fetchProiezione(parseInt(route.params.proiezioneId, 10));
-  }
-
-  checkAvailability();
-});
 const fetchProiezione = async (id: number) => {
   try {
-   const response = await Service.get<Proiezione>(`/proiezione/${id}`);
-   if(response){
-     proiezione.value = response;
-   }
+    const response = await Service.get<Proiezione>(`/proiezione/${id}`);
+    if (response) {
+      proiezione.value = response;
+    }
+  } catch (error) {
+    console.error('Error fetching proiezione:', error);
   }
-  catch (error) {
-    console.log(error);
-  }
-}
-const checkAvailability = async () => {
+};
+
+const checkAvailability = async (id: number) => {
   try {
-    const availableSeats: number = await Service.get<number>(`/getDisponibilita/${proiezioneId.value}`);
+    const availableSeats = await Service.get<number>(`/getDisponibilita/${id}`);
     if (availableSeats) {
       maxTickets.value = availableSeats;
     }
@@ -73,19 +71,23 @@ const checkAvailability = async () => {
   }
 };
 
+const closeModal = () => {
+  emit('close');
+};
+
 const submitBooking = async () => {
   const dataPrenotazione = new Date().toISOString().split('T')[0];
   const booking: Prenotazione = {
     id: null,
     numeroBiglietti: numeroBiglietti.value,
     dataPrenotazione: dataPrenotazione,
-    proiezioneId: proiezioneId.value!,
+    proiezioneId: props.proiezioneId!,
     utenteId: -1,
   };
 
   try {
     await Service.post('/insertPrenotazione', booking);
-
+    closeModal();
   } catch (error) {
     console.error('Error submitting booking:', error);
   }

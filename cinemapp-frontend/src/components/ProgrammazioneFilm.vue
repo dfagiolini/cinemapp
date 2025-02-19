@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Card, Badge, Divider } from 'primevue';
+import { Card, Badge, Divider, Button } from 'primevue';
 import type {Cinema} from "@/model/cinema.ts";
 import type {Proiezione} from "@/model/proiezione.ts";
 import type {ProgrammazioneFilm} from "@/model/programmazione-film.ts";
@@ -8,10 +8,18 @@ import Service from "@/services/service.ts";
 import { useRoute } from 'vue-router';
 import FilmCard from "@/components/FilmCard.vue";
 import type {Film} from "@/model/film.ts";
+import PrenotazioneComponent from "@/components/PrenotazioneComponent.vue";
 
 const route = useRoute()
 const programmazione = ref<ProgrammazioneFilm[]>([]);
 const film = ref<Film>();
+const isModalVisible = ref(false);
+const selectedProiezioneId = ref<number | null>(null);
+
+const openModal = (proiezioneId: number) => {
+  selectedProiezioneId.value = proiezioneId;
+  isModalVisible.value = true;
+};
 
 const fetchProgrammazione = async () => {
   try {
@@ -33,6 +41,8 @@ const fetchFilm = async () => {
     console.log(error);
   }
 }
+
+
 fetchFilm();
 fetchProgrammazione();
 </script>
@@ -68,11 +78,19 @@ fetchProgrammazione();
                 <p><strong>Fine:</strong> {{ proiezione.dataOraFine }}</p>
                 <p><strong>Prezzo:</strong> {{ proiezione.prezzo }}€</p>
               </template>
+              <template #footer>
+                <Button label="Prenota" @click="openModal(proiezione.id)"/>
+
+
+              </template>
             </Card>
           </div>
         </template>
       </Card>
     </div>
+  </div>
+  <div>
+  <PrenotazioneComponent :visible="isModalVisible" :proiezioneId="selectedProiezioneId" @close="isModalVisible = false" />
   </div>
 </template>
 
