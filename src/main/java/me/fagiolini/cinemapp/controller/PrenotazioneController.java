@@ -41,13 +41,12 @@ public class PrenotazioneController {
     @Secured(SecurityRule.IS_AUTHENTICATED)
     @Post(uri = "/insertPrenotazione")
     public void insertPrenotazione(@Body Prenotazione p, HttpRequest<?> request) throws myException {
-        if (VerifyAdmin.verify(request))
-            this.prenotazioneService.save(p);
-        else {
+
+            System.out.println(JwtUtil.getUserIdFromRequest(request));
             p.setUtenteId(JwtUtil.getUserIdFromRequest(request));
             p.setDataPrenotazione(LocalDate.now());
             this.prenotazioneService.save(p);
-        }
+
     }
 
     @Secured(SecurityRule.IS_AUTHENTICATED)

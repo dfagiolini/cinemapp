@@ -55,6 +55,7 @@ const adminItems = ref([
     <Menubar :model="items">
 
       <template #end>
+
         <Menubar :model="adminItems" />
       </template>
     </Menubar>
