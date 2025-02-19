@@ -1,5 +1,5 @@
 <template>
-  <Dialog header="Prenotazione" :visible="visible" modal @close="closeModal"> >
+  <Dialog header="Prenotazione" :visible="visible" modal @close="closeModal">
     <Card>
       <template #content>
         <p><strong>Inizio:</strong> {{ proiezione.dataOraInizio }}</p>
