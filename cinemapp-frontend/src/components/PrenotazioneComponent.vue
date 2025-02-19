@@ -1,5 +1,5 @@
 <template>
-  <Dialog header="Prenotazione" :visible="visible" modal @hide="closeModal">
+  <Dialog header="Prenotazione" :visible="visible" modal @close="closeModal"> >
     <Card>
       <template #content>
         <p><strong>Inizio:</strong> {{ proiezione.dataOraInizio }}</p>
@@ -73,6 +73,7 @@ const checkAvailability = async (id: number) => {
 
 const closeModal = () => {
   emit('close');
+
 };
 
 const submitBooking = async () => {

@@ -2,6 +2,9 @@
 import {RouterLink, RouterView} from 'vue-router'
 
 import menubar from "@/components/menubar.vue";
+import {verifyAdmin} from "@/utils/VerifyAdmin.ts";
+
+
 </script>
 
 <template>

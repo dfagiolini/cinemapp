@@ -9,7 +9,7 @@
         </div>
         <div class="p-field">
           <label for="password">Password</label>
-          <Password id="password" v-model="password" toggleMask required feedback={false} />
+          <Password id="password" v-model="password"  required feedback={false} />
         </div>
         <Button label="Login" icon="pi pi-sign-in" type="submit" class="p-mt-3" />
       </form>
@@ -32,5 +32,6 @@ const router = useRouter();
 
 const handleLogin = async () => {
   await authStore.login(username.value, password.value);
+  console.log(authStore.userdetails);
 };
 </script>

@@ -1,5 +1,6 @@
 package me.fagiolini.cinemapp.service;
 
+import io.micronaut.http.HttpRequest;
 import io.micronaut.security.token.jwt.generator.JwtTokenGenerator;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -8,9 +9,11 @@ import jakarta.validation.constraints.NotNull;
 import me.fagiolini.cinemapp.db.tables.pojos.Utente;
 import me.fagiolini.cinemapp.db.tables.daos.UtenteDao;
 import me.fagiolini.cinemapp.exception.myException;
+import me.fagiolini.cinemapp.model.UtenteDetails;
 import me.fagiolini.cinemapp.repository.UtenteRepository;
 
 import io.micronaut.security.token.jwt.generator.JwtTokenGenerator;
+import me.fagiolini.cinemapp.utils.JwtUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -58,6 +61,14 @@ public class UtenteService {
 
 
         return jwtTokenGenerator.generateToken(claims);
+    }
+
+    public UtenteDetails getDetailsFromRequest(HttpRequest<?> request) {
+        Utente u = this.utenteRepository.findById(JwtUtil.getUserIdFromRequest(request));
+        UtenteDetails uDetails = new UtenteDetails(u.getNome(), u.getEmail());
+        return uDetails;
+
+
     }
 
 }

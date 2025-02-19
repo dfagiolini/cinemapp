@@ -41,7 +41,9 @@ const fetchFilm = async () => {
     console.log(error);
   }
 }
-
+const closeModal = () => {
+  this.modalVisible.value = false;
+}
 
 fetchFilm();
 fetchProgrammazione();
@@ -90,7 +92,7 @@ fetchProgrammazione();
     </div>
   </div>
   <div>
-  <PrenotazioneComponent :visible="isModalVisible" :proiezioneId="selectedProiezioneId" @close="isModalVisible = false" />
+  <PrenotazioneComponent v-model:visible="isModalVisible" :proiezioneId="selectedProiezioneId" @close="closeModal" />
   </div>
 </template>
 

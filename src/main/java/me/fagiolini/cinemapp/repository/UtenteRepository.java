@@ -32,4 +32,8 @@ public class UtenteRepository {
     public Utente findByNome(String nome) {
         return utenteDao.fetchOneByNome(nome);
     }
+
+    public Utente findById(long id) {
+        return utenteDao.fetchOneById(id);
+    }
 }
