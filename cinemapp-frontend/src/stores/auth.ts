@@ -24,6 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
   const router = useRouter();
   const userdetails = ref<UserDetails>({nome: null, email: null});
   const isAdmin = ref<boolean>(false);
+  const isLoggedIn = ref<boolean>(false);
 
   function decodeToken(token: string): void {
     const decoded = jwtDecode<JwtPayload>(token);
@@ -39,24 +40,43 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem('token', token.value);
         decodeToken(token.value);
 
+        try {
+          userdetails.value = await Service.get<UserDetails>('/getMyDetails');
+          localStorage.setItem('userDetails', JSON.stringify(userdetails.value));
+        } catch (error) {
+          console.log(error);
+        }
 
       }
-
+      isLoggedIn.value = true;
       router.push('/');
     } catch (error) {
       console.error('Login failed:', error);
       alert('Login failed. Please check your credentials.');
     }
-    userdetails.value = await Service.get<UserDetails>('/getMyDetails');
-    localStorage.setItem('userDetails', JSON.stringify(userdetails.value));
-  }
 
+  }
+  function getUserDetailsFromLocalStorage() {
+    const userDetailsString = localStorage.getItem('userDetails');
+    if (userDetailsString) {
+      try {
+        return JSON.parse(userDetailsString);
+      } catch (error) {
+        console.error('Failed to parse user details:', error);
+        return null;
+      }
+    }
+    return null;
+  }
   function logout() {
     token.value = null;
     role.value = null;
     localStorage.removeItem('token');
     userdetails.value = {nome: null, email: null};
     localStorage.removeItem('userDetails');
+    isLoggedIn.value = false;
+    isAdmin.value = false;
+
     router.push('/login');
   }
 
@@ -69,7 +89,8 @@ export const useAuthStore = defineStore('auth', () => {
     role,
     login,
     logout,
-    userdetails,
-    isAdmin
+    getUserDetailsFromLocalStorage,
+    isAdmin,
+    isLoggedIn
   };
 });

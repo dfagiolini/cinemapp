@@ -1,16 +1,21 @@
 <script setup lang="ts">
-import {RouterLink, RouterView} from 'vue-router'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router';
 
 import menubar from "@/components/menubar.vue";
-import {verifyAdmin} from "@/utils/VerifyAdmin.ts";
+import {ref, watchEffect} from "vue";
 
+const route = useRoute();
+const menubarKey = ref(route.fullPath);
 
+watchEffect(() => {
+  menubarKey.value = route.fullPath;
+});
 </script>
 
 <template>
   <div id=app>
-    <header class="menubar">
-    <menubar />
+    <header>
+    <menubar :key="menubarKey" />
     </header>
     <div class ="content">
     <RouterView />

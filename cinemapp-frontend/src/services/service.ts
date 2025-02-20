@@ -69,6 +69,15 @@ public async get<T>(endpoint: string): Promise<T> {
       throw error;
     }
   }
+  async loginTest<T>(endpoint: string): Promise<AxiosResponse<T>> {
+    try {
+      const response: AxiosResponse<T> = await this.apiClient.get(endpoint);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 
 }
 

@@ -41,7 +41,7 @@ public class UtenteController {
     }
 
     @Secured(SecurityRule.IS_AUTHENTICATED)
-    @Post("/loginTest")
+    @Get("/loginTest")
     public void loginTest() {}
 
     @Secured(SecurityRule.IS_AUTHENTICATED)
