@@ -24,11 +24,9 @@ public class PrenotazioneController {
     @Secured(SecurityRule.IS_AUTHENTICATED)
     @Get(uri = "/prenotazioni")
     public List<Prenotazione> prenotazioni(HttpRequest request) throws myException {
-        if(VerifyAdmin.verify(request))
-            return this.prenotazioneService.getPrenotazioni();
-        else {
+
             return this.prenotazioneService.getPrenotazioniByUserId(JwtUtil.getUserIdFromRequest(request));
-        }
+
     }
     @Secured(SecurityRule.IS_AUTHENTICATED)
     @Get(uri = "/prenotazione/{id}")

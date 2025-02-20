@@ -10,6 +10,7 @@ import ProiezioneCRUD from "@/components/ProiezioneCRUD.vue";
 import PrenotazioneCRUD from "@/components/PrenotazioneCRUD.vue";
 import Login from "@/components/Login.vue";
 import PrenotazioneComponent from "@/components/PrenotazioneComponent.vue";
+import Profilo from "@/components/Profilo.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +64,10 @@ const router = createRouter({
       path: '/Prenota/:proiezioneId',
       name: 'prenota',
       component: PrenotazioneComponent,
+    }, {
+    path: "/profilo",
+      name: "profilo",
+      component: Profilo
     }
 
   ],
