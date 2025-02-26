@@ -5,7 +5,7 @@
 
 ## Descrizione del Progetto
 
-Cinemapp è un'applicazione web completa progettata per la gestione efficiente di cinema e del processo di prenotazione dei biglietti.  Nata come progetto personale per mettere in pratica e approfondire diverse tecnologie moderne, Cinemapp offre una soluzione intuitiva e funzionale sia per gli utenti che desiderano prenotare biglietti, sia per gli amministratori che gestiscono le programmazioni dei cinema.
+Cinemapp è un'applicazione web completa progettata per la gestione efficiente di cinema e del processo di prenotazione dei biglietti.  Nata come progetto personale per mettere in pratica e approfondire diverse tecnologie moderne, è stato divertente e istruttivo implementare questa piccola applicazione.
 
 L'applicazione permette di gestire diversi cinema, le loro programmazioni di film, e offre agli utenti la possibilità di prenotare biglietti per le proiezioni disponibili.  Particolare attenzione è stata posta all'utilizzo di tecnologie performanti e moderne.
 
