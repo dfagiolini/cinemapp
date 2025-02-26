@@ -7,7 +7,7 @@
 
 Cinemapp è un'applicazione web completa progettata per la gestione efficiente di cinema e del processo di prenotazione dei biglietti.  Nata come progetto personale per mettere in pratica e approfondire diverse tecnologie moderne, Cinemapp offre una soluzione intuitiva e funzionale sia per gli utenti che desiderano prenotare biglietti, sia per gli amministratori che gestiscono le programmazioni dei cinema.
 
-L'applicazione permette di gestire diversi cinema, le loro programmazioni di film, e offre agli utenti la possibilità di prenotare biglietti per le proiezioni disponibili.  Particolare attenzione è stata posta all'implementazione di funzionalità avanzate e all'utilizzo di tecnologie performanti e moderne.
+L'applicazione permette di gestire diversi cinema, le loro programmazioni di film, e offre agli utenti la possibilità di prenotare biglietti per le proiezioni disponibili.  Particolare attenzione è stata posta all'utilizzo di tecnologie performanti e moderne.
 
 ## Funzionalità Principali
 
@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/ab53ee4f-5f08-47f7-b0b9-bd7927b45101
   * **Autenticazione e Autorizzazione:**  Sistema di autenticazione basato su JWT con differenziazione dei ruoli utente.  Sono presenti due ruoli principali:
       * **Utente Normale:** Può consultare le programmazioni e prenotare biglietti in base alle disponibilità.
       * **Amministratore:**  Ha accesso completo alla gestione di cinema, sale, film etc.
-  * **Dati Annidati Ottimizzati per il Frontend:**  Utilizzo di query complesse in jOOQ per recuperare e strutturare i dati in formati annidati, ottimizzati per essere facilmente consumati e visualizzati dal frontend Vue.js, migliorando le performance e la reattività dell'interfaccia utente. Ad esempio:
+  * **Dati Annidati Ottimizzati per il Frontend:**  Utilizzo di query in jOOQ per recuperare e strutturare i dati in formati annidati, ottimizzati per essere facilmente consumati e visualizzati dal frontend Vue.js, migliorando le performance e la reattività dell'interfaccia utente. Ad esempio:
     ```
     [
     {
