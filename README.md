@@ -11,7 +11,7 @@ L'applicazione permette di gestire diversi cinema, le loro programmazioni di fil
 
 ## Funzionalità Principali
 
-  * **Gestione CRUD base:**  Permette agli amministratori di creare, modificare, eliminare cinema, sale, proiezioni, film etc.
+  * **Gestione CRUD base:**  Permette agli amministratori di creare, modificare, eliminare cinema, sale, proiezioni, film etc con controlli ad esempio sulla possibile sovrapposizione tra proiezioni.
   * **Visualizzare Programmazioni:**  Consente di visualizzare le programmazioni dei film per ciascun cinema e dei cinema per ciascun film, con orari e date delle proiezioni.
   * **Prenotazione Biglietti Utente:** Gli utenti possono consultare le programmazioni disponibili, selezionare un cinema, un film e una proiezione, e prenotare il numero desiderato di biglietti, con controlli sulle disponibilità.
   * **Query Dinamiche:** Implementazione di potenti query dinamiche per il filtraggio e la ricerca efficiente di film e cinema, permettendo agli utenti di trovare rapidamente le proiezioni desiderate in base a diversi criteri.
