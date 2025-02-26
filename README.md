@@ -1,106 +1,88 @@
-## Micronaut 4.7.5 Documentation
-
-- [User Guide](https://docs.micronaut.io/4.7.5/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.7.5/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.7.5/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
-
-- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
-- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
-- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
-## Feature serialization-jackson documentation
-
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
+# Cinemapp - Applicazione Web per la Gestione di Cinema e Prenotazioni
 
 
-## Feature jdbc-hikari documentation
-
-- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
 
 
-## Feature reactor documentation
+## Descrizione del Progetto
 
-- [Micronaut Reactor documentation](https://micronaut-projects.github.io/micronaut-reactor/snapshot/guide/index.html)
+Cinemapp è un'applicazione web completa progettata per la gestione efficiente di cinema e del processo di prenotazione dei biglietti.  Nata come progetto personale per mettere in pratica e approfondire diverse tecnologie moderne, Cinemapp offre una soluzione intuitiva e funzionale sia per gli utenti che desiderano prenotare biglietti, sia per gli amministratori che gestiscono le programmazioni dei cinema.
 
+L'applicazione permette di gestire diversi cinema, le loro programmazioni di film, e offre agli utenti la possibilità di prenotare biglietti per le proiezioni disponibili.  Particolare attenzione è stata posta all'implementazione di funzionalità avanzate e all'utilizzo di tecnologie performanti e moderne.
 
-## Feature lombok documentation
+## Funzionalità Principali
 
-- [Micronaut Project Lombok documentation](https://docs.micronaut.io/latest/guide/index.html#lombok)
+  * **Gestione CRUD base:**  Permette agli amministratori di creare, modificare, eliminare cinema, sale, proiezioni, film etc.
+  * **Visualizzare Programmazioni:**  Consente di visualizzare le programmazioni dei film per ciascun cinema e dei cinema per ciascun film, con orari e date delle proiezioni.
+  * **Prenotazione Biglietti Utente:** Gli utenti possono consultare le programmazioni disponibili, selezionare un cinema, un film e una proiezione, e prenotare il numero desiderato di biglietti, con controlli sulle disponibilità.
+  * **Query Dinamiche:** Implementazione di potenti query dinamiche per il filtraggio e la ricerca efficiente di film e cinema, permettendo agli utenti di trovare rapidamente le proiezioni desiderate in base a diversi criteri.
+    
 
-- [https://projectlombok.org/features/all](https://projectlombok.org/features/all)
-
-
-## Feature views-jte documentation
-
-- [Micronaut JTE Views documentation](https://micronaut-projects.github.io/micronaut-views/latest/guide/#jte)
-
-- [https://jte.gg/](https://jte.gg/)
+https://github.com/user-attachments/assets/ab53ee4f-5f08-47f7-b0b9-bd7927b45101
 
 
-## Feature json-schema documentation
+  * **Autenticazione e Autorizzazione:**  Sistema di autenticazione basato su JWT con differenziazione dei ruoli utente.  Sono presenti due ruoli principali:
+      * **Utente Normale:** Può consultare le programmazioni e prenotare biglietti in base alle disponibilità.
+      * **Amministratore:**  Ha accesso completo alla gestione di cinema, sale, film etc.
+  * **Dati Annidati Ottimizzati per il Frontend:**  Utilizzo di query complesse in jOOQ per recuperare e strutturare i dati in formati annidati, ottimizzati per essere facilmente consumati e visualizzati dal frontend Vue.js, migliorando le performance e la reattività dell'interfaccia utente. Ad esempio:
+    ```
+    [
+    {
+        "cinema": {
+            "id": 4,
+            "indirizzo": "Via Firenze, 8",
+            "nome": "Cinema Firenze",
+            "telefono": "345678901"
+        },
+        "proiezioni": [
+            {
+                "id": 8,
+                "dataOraFine": "2025-02-08T22:00:00",
+                "dataOraInizio": "2025-02-08T20:00:00",
+                "prezzo": 10,
+                "filmId": 1,
+                "salaId": 7
+            }
+        ]
+    },
+    {
+        "cinema": {
+            "id": 1,
+            "indirizzo": "Via Roma, 1",
+            "nome": "Cinema Roma",
+            "telefono": "123456789"
+        },
+        "proiezioni": [
+            {
+                "id": 2,
+                "dataOraFine": "2025-02-08T22:00:00",
+                "dataOraInizio": "2025-02-08T20:00:00",
+                "prezzo": 10.5,
+                "filmId": 1,
+                "salaId": 1
+            },
+            {
+                "id": 1,
+                "dataOraFine": "2025-02-08T20:00:00",
+                "dataOraInizio": "2025-02-08T18:00:00",
+                "prezzo": 10.5,
+                "filmId": 1,
+                "salaId": 1
+            }
+        ]
+    }
+    ]
+    ```
 
-- [Micronaut JSON Schema documentation](https://micronaut-projects.github.io/micronaut-json-schema/latest/guide/)
+## Tecnologie Utilizzate
 
-- [https://json-schema.org/learn/getting-started-step-by-step](https://json-schema.org/learn/getting-started-step-by-step)
+Il progetto Cinemapp è stato sviluppato utilizzando le seguenti tecnologie chiave:
 
+  * **Backend:**
 
-## Feature security-session documentation
+      * **[Micronaut](https://micronaut.io/)**: Framework Java moderno e leggero per la costruzione di microservizi e applicazioni cloud-native. Scelto per le sue performance, la velocità di startup e la facilità di sviluppo.
+      * **[jOOQ](https://www.jooq.org/)**: Libreria Java per la mappatura object-relational (ORM) che permette di scrivere query SQL in modo typesafe e fluent, facilitando l'interazione con il database PostgreSQL.
+      * **[PostgreSQL](https://www.postgresql.org/)**: Database relazionale open-source potente e affidabile, scelto per la sua robustezza, le funzionalità avanzate e la compatibilità con jOOQ.
 
-- [Micronaut Security Session documentation](https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#session)
+  * **Frontend:**
 
-
-## Feature test-resources documentation
-
-- [Micronaut Test Resources documentation](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/)
-
-
-## Feature jooq documentation
-
-- [Micronaut jOOQ documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jooq)
-
-
-## Feature security documentation
-
-- [Micronaut Security documentation](https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html)
-
-
-## Feature security-jwt documentation
-
-- [Micronaut Security JWT documentation](https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html)
-
-
-## Feature openapi documentation
-
-- [Micronaut OpenAPI Support documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
-- [https://www.openapis.org](https://www.openapis.org)
-
-
-## Feature micronaut-aot documentation
-
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
-
-
-## Feature swagger-ui documentation
-
-- [Micronaut Swagger UI documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
-- [https://swagger.io/tools/swagger-ui/](https://swagger.io/tools/swagger-ui/)
-
-
-## Feature micronaut-aop documentation
-
-- [Micronaut Aspect-Oriented Programming (AOP) documentation](https://docs.micronaut.io/latest/guide/index.html#aop)
-
-
-## Feature json-schema-validation documentation
-
-- [Micronaut JSON Schema Validation documentation](https://micronaut-projects.github.io/micronaut-json-schema/latest/guide/index.html#validation)
-
-
-## Feature security-csrf documentation
-
-- [Micronaut Security CSRF documentation](https://micronaut-projects.github.io/micronaut-security/latest/guide/index.html#csrf)
-
-
+      * **[Vue.js](https://vuejs.org/)**: Framework JavaScript progressivo per la costruzione di interfacce utente interattive e reattive. Scelto per la sua semplicità, flessibilità e performance nella creazione di applicazioni web single-page application (SPA).
