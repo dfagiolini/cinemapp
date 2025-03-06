@@ -1,29 +1,24 @@
-# Cinemapp - Applicazione Web per la Gestione di Cinema e Prenotazioni
+# Cinemapp - Web Application for Cinema and Booking Management
 
+## Project Description
 
+Cinemapp is a comprehensive web application designed for the efficient management of cinemas and the ticket booking process. Born as a personal project to put into practice and deepen various modern technologies, implementing this small application has been fun and instructive.
 
+The application allows for the management of different cinemas, their film schedules, and offers users the ability to book tickets for available screenings. Particular attention has been paid to the use of high-performance and modern technologies.
 
-## Descrizione del Progetto
+## Main Functionalities
 
-Cinemapp è un'applicazione web completa progettata per la gestione efficiente di cinema e del processo di prenotazione dei biglietti.  Nata come progetto personale per mettere in pratica e approfondire diverse tecnologie moderne, è stato divertente e istruttivo implementare questa piccola applicazione.
-
-L'applicazione permette di gestire diversi cinema, le loro programmazioni di film, e offre agli utenti la possibilità di prenotare biglietti per le proiezioni disponibili.  Particolare attenzione è stata posta all'utilizzo di tecnologie performanti e moderne.
-
-## Funzionalità Principali
-
-  * **Gestione CRUD base:**  Permette agli amministratori di creare, modificare, eliminare cinema, sale, proiezioni, film etc con controlli ad esempio sulla possibile sovrapposizione tra proiezioni.
-  * **Visualizzare Programmazioni:**  Consente di visualizzare le programmazioni dei film per ciascun cinema e dei cinema per ciascun film, con orari e date delle proiezioni.
-  * **Prenotazione Biglietti Utente:** Gli utenti possono consultare le programmazioni disponibili, selezionare un cinema, un film e una proiezione, e prenotare il numero desiderato di biglietti, con controlli sulle disponibilità.
-  * **Query Dinamiche:** Implementazione di potenti query dinamiche per il filtraggio e la ricerca efficiente di film e cinema, permettendo agli utenti di trovare rapidamente le proiezioni desiderate in base a diversi criteri.
-    
+* **Basic CRUD Management:** Allows administrators to create, modify, and delete cinemas, halls, screenings, films, etc., with controls, for example, on the possible overlap between screenings.
+* **View Schedules:** Allows viewing film schedules for each cinema and cinemas for each film, with screening times and dates.
+* **User Ticket Booking:** Users can consult available schedules, select a cinema, a film, and a screening, and book the desired number of tickets, with availability checks.
+* **Dynamic Queries:** Implementation of powerful dynamic queries for efficient filtering and searching of films and cinemas, allowing users to quickly find desired screenings based on various criteria.
 
 https://github.com/user-attachments/assets/ab53ee4f-5f08-47f7-b0b9-bd7927b45101
 
-
-  * **Autenticazione e Autorizzazione:**  Sistema di autenticazione basato su JWT con differenziazione dei ruoli utente.  Sono presenti due ruoli principali:
-      * **Utente Normale:** Può consultare le programmazioni e prenotare biglietti in base alle disponibilità.
-      * **Amministratore:**  Ha accesso completo alla gestione di cinema, sale, film etc.
-  * **Dati Annidati Ottimizzati per il Frontend:**  Utilizzo di query in jOOQ per recuperare e strutturare i dati in formati annidati, ottimizzati per essere facilmente consumati e visualizzati dal frontend Vue.js, migliorando le performance e la reattività dell'interfaccia utente. Ad esempio:
+* **Authentication and Authorization:** JWT-based authentication system with user role differentiation. There are two main roles:
+    * **Regular User:** Can consult schedules and book tickets based on availability.
+    * **Administrator:** Has full access to the management of cinemas, halls, films, etc.
+* **Nested Data Optimized for Frontend:** Use of jOOQ queries to retrieve and structure data in nested formats, optimized to be easily consumed and displayed by the Vue.js frontend, improving the performance and responsiveness of the user interface. For example:
     ```
     [
     {
@@ -73,16 +68,16 @@ https://github.com/user-attachments/assets/ab53ee4f-5f08-47f7-b0b9-bd7927b45101
     ]
     ```
 
-## Tecnologie Utilizzate
+## Technologies Used
 
-Il progetto Cinemapp è stato sviluppato utilizzando le seguenti tecnologie chiave:
+The Cinemapp project was developed using the following key technologies:
 
-  * **Backend:**
+* **Backend:**
 
-      * **[Micronaut](https://micronaut.io/)**: Framework Java moderno e leggero per la costruzione di microservizi e applicazioni cloud-native. Scelto per le sue performance, la velocità di startup e la facilità di sviluppo.
-      * **[jOOQ](https://www.jooq.org/)**: Libreria Java per la mappatura object-relational (ORM) che permette di scrivere query SQL in modo typesafe e fluent, facilitando l'interazione con il database PostgreSQL.
-      * **[PostgreSQL](https://www.postgresql.org/)**: Database relazionale open-source potente e affidabile, scelto per la sua robustezza, le funzionalità avanzate e la compatibilità con jOOQ.
+    * **[Micronaut](https://micronaut.io/)**: Modern and lightweight Java framework for building microservices and cloud-native applications. Chosen for its performance, startup speed, and ease of development.
+    * **[jOOQ](https://www.jooq.org/)**: Java library for object-relational mapping (ORM) that allows writing SQL queries in a typesafe and fluent manner, facilitating interaction with the PostgreSQL database.
+    * **[PostgreSQL](https://www.postgresql.org/)**: Powerful and reliable open-source relational database, chosen for its robustness, advanced features, and compatibility with jOOQ.
 
-  * **Frontend:**
+* **Frontend:**
 
-      * **[Vue.js](https://vuejs.org/)**: Framework JavaScript progressivo per la costruzione di interfacce utente interattive e reattive. Scelto per la sua semplicità, flessibilità e performance nella creazione di applicazioni web single-page application (SPA).
+    * **[Vue.js](https://vuejs.org/)**: Progressive JavaScript framework for building interactive and reactive user interfaces. Chosen for its simplicity, flexibility, and performance in creating single-page application (SPA) web applications.
